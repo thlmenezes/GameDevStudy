@@ -1,0 +1,52 @@
+# @author Thales Lima Menezes
+# @github thlmenezes
+# @date   29/07/2021
+#
+# This script was written by thlmenezes and
+# is released to the public domain
+#
+##################################################################
+###########Variables
+#  SRC_DIR equals source code folder
+#  sources has a string with the address of all source files (*.cpp)
+#  objects has a string with the address of all object files (*.o)
+#  CC equals compiler
+#  CFLAGS equals compiling flags
+#  LFLAGS equals linking flags
+#  ':=' the non-recursive way of initializing a variable
+#  '$^' used to insert all the rule' dependencies in the command
+##################################################################
+SRC_DIR := src
+sources := $(wildcard $(SRC_DIR)/*.cpp)
+objects := $(sources:$(SRC_DIR)/%.cpp=obj/%.o)
+deps    := $(objects:.o=.d)
+files   := $(objects) $(deps) Main
+
+CC       := g++
+CPPFLAGS := -MMD -MP
+CFLAGS   := -g -Wall -pedantic
+LDLIBS   := -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf
+
+main: $(objects)
+	$(LINK.o) $^ $(LDLIBS) -o $@
+
+##################################################################
+###########Building Rules
+#  Used when compiling an object for COMPILE
+#	'$<' means to use the string that's to the right of the ':'
+#	'$@' means to use the string that's to the left of the ':'
+#  Every "*.cpp" in the folder "$(SRC_DIR)" must compile in to an
+#  "*.o" in the "obj" and has a dependecy to it's matching
+#  source file.
+#  @<command> sillences command output
+#  @mkdir obj guarantees the obj dir exists before compiling
+##################################################################
+obj/%.o: $(SRC_DIR)/%.cpp
+	@mkdir obj || true
+	$(COMPILE.c) $(OUTPUT_OPTION) $<
+
+clean:
+	rm $(files)
+	@rmdir obj
+
+-include $(deps)
