@@ -4,6 +4,7 @@
 using namespace std;
 
 #include "Game.h"
+#include "State.h"
 #define INCLUDE_SDL_IMAGE
 #define INCLUDE_SDL_MIXER
 #include "SDL_include.h"
@@ -44,7 +45,7 @@ Game::Game(string title, int width, int height)
   Mix_AllocateChannels(NUM_CHANNELS);
 
   const Uint32 WINDOW_FLAGS = 0;
-  SDL_Window *game_window = SDL_CreateWindow(
+  window = SDL_CreateWindow(
       title.c_str(),
       SDL_WINDOWPOS_CENTERED,
       SDL_WINDOWPOS_CENTERED,
@@ -52,17 +53,19 @@ Game::Game(string title, int width, int height)
       height,
       WINDOW_FLAGS);
 
-  if (game_window == nullptr)
+  if (window == nullptr)
     throw_with_nested(runtime_error("SDL Create Window"));
 
   const int RENDERER_INDEX = -1;
-  SDL_Renderer *game_renderer = SDL_CreateRenderer(
-      game_window,
+  renderer = SDL_CreateRenderer(
+      window,
       RENDERER_INDEX,
       SDL_RENDERER_ACCELERATED);
 
-  if (game_renderer == nullptr)
+  if (renderer == nullptr)
     throw_with_nested(runtime_error("SDL Create Renderer"));
+
+  // TODO: state = new State();
 
   return;
 }
