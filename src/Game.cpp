@@ -1,11 +1,57 @@
-#include "Game.h"
+#include <iostream>
+#include <exception>
 
-Game::Game(){
+using namespace std;
+
+#include "Game.h"
+#define INCLUDE_SDL_IMAGE
+#define INCLUDE_SDL_MIXER
+#include "SDL_include.h"
+
+Game::Game(string title, int width, int height){
+  if (instance != nullptr)
+    throw_with_nested(runtime_error("Singleton Error"));
+  instance = this;
+
+  if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER))
+    throw_with_nested(runtime_error(SDL_GetError()));
+
+  const int sdl_image = IMG_Init(IMG_INIT_JPG);
+  if (0 == sdl_image){
+    cout << sdl_image;
+    throw_with_nested(runtime_error("SDL Image Init"));
+  }
+
+  const int sdl_mix = Mix_Init(MIX_INIT_OGG);
+  if (0 == sdl_mix){
+    cout << sdl_mix;
+    throw_with_nested(runtime_error("MIX Audio Init"));
+  }
+
+  const int CHUNK_SIZE = 1024;
+  if(
+    Mix_OpenAudio(
+      MIX_DEFAULT_FREQUENCY,
+      MIX_DEFAULT_FORMAT,
+      MIX_DEFAULT_CHANNELS,
+      CHUNK_SIZE
+    )
+  )
+    throw_with_nested(runtime_error("MIX Open Audio"));
+
+  const int NUM_CHANNELS = 32;
+  Mix_AllocateChannels(NUM_CHANNELS);
+
   return;
 }
 
 Game& Game::GetInstance(){
-  if (instance != nullptr) instance = new Game;
+  const string TITLE = "Thales Lima Menezes - 170045919";
+  const int WIDTH = 1024;
+  const int HEIGHT = 600;
+
+  if (instance == nullptr) instance = new Game(TITLE,WIDTH,HEIGHT);
+
   return *instance;
 }
 
