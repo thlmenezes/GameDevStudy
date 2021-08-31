@@ -12,9 +12,9 @@
     public:
       Music();
       Music(string file);
+      void Open(string file);
       void Play(int times = -1);
       void Stop(int msToStop = 1500);
-      void Open(string file);
       bool IsOpen();
       ~Music();
   };
