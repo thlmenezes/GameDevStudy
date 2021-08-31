@@ -12,6 +12,7 @@
     int width;
     int height;
     SDL_Rect clipRect;
+    void DestroyTexture();
 
     public:
       Sprite();
