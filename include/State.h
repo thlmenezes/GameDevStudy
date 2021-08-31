@@ -13,10 +13,9 @@
     Sprite bg;
     public:
       State();
-      bool QuitRequested();
       void LoadAssets();
       void Update(float dt);
       void Render();
-      ~State();
+      bool QuitRequested();
   };
 #endif
