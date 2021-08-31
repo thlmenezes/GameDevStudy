@@ -18,6 +18,9 @@
     Game(string title, int width, int height);
     public:
       static Game& GetInstance();
+      void Run();
+      SDL_Renderer* GetRenderer();
+      State& GetState();
       ~Game();
   };
 #endif
