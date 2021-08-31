@@ -21,14 +21,14 @@ Game::Game(string title, int width, int height)
   const int sdl_image = IMG_Init(IMG_INIT_JPG);
   if (0 == sdl_image)
   {
-    cout << sdl_image;
+    cerr << sdl_image;
     throw_with_nested(runtime_error("SDL Image Init"));
   }
 
   const int sdl_mix = Mix_Init(MIX_INIT_OGG);
   if (0 == sdl_mix)
   {
-    cout << sdl_mix;
+    cerr << sdl_mix;
     throw_with_nested(runtime_error("MIX Audio Init"));
   }
 

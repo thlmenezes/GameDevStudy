@@ -35,7 +35,7 @@ void Sprite::Open(string file)
 
   if (texture == nullptr)
   {
-    cout << SDL_GetError();
+    cerr << SDL_GetError();
     throw_with_nested(runtime_error("IMG_LoadTexture with file: " + file));
   }
 
