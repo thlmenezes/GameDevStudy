@@ -26,7 +26,7 @@ void Music::Open(string file)
     throw_with_nested(runtime_error("Mix_LoadMUS with file: " + file));
 }
 
-void Music::Play(int times = -1)
+void Music::Play(int times)
 {
   if (music == nullptr)
     throw_with_nested(invalid_argument("Attempt to play uninitialized music"));
@@ -34,7 +34,7 @@ void Music::Play(int times = -1)
   Mix_PlayMusic(music, times);
 }
 
-void Music::Stop(int msToStop = 1500)
+void Music::Stop(int msToStop)
 {
   Mix_FadeOutMusic(msToStop);
 }
