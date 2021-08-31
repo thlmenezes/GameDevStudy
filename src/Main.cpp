@@ -5,7 +5,7 @@ int main(int argc, char **argv)
 {
   Game &jogo = Game::GetInstance();
 
-  // TODO: run game
+  jogo.Run();
 
   return 0;
 }
