@@ -13,14 +13,16 @@ using namespace std;
 State::State()
 {
   quitRequested = false;
-  bg = Sprite();
-  music = Music();
+  bg = *new Sprite();
+  music = *new Music();
+  LoadAssets();
 }
 
 void State::LoadAssets()
 {
   bg.Open("assets/img/ocean.jpg");
   music.Open("assets/audio/stageState.ogg");
+  music.Play();
 }
 
 void State::Update(float dt)
