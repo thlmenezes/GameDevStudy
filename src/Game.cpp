@@ -65,9 +65,7 @@ Game::Game(string title, int width, int height)
   if (renderer == nullptr)
     throw_with_nested(runtime_error("SDL Create Renderer"));
 
-  // TODO: state = new State();
-
-  return;
+  state = new State();
 }
 
 Game &Game::GetInstance()
@@ -82,6 +80,33 @@ Game &Game::GetInstance()
   return *instance;
 }
 
+void Game::Run()
+{
+  while (!state->QuitRequested())
+  {
+    state->Update(0);
+    state->Render();
+    SDL_RenderPresent(renderer);
+    SDL_Delay(33);
+  }
+}
+
+SDL_Renderer *Game::GetRenderer()
+{
+  return renderer;
+}
+
+State &Game::GetState()
+{
+  return *state;
+}
+
 Game::~Game()
 {
+  SDL_DestroyRenderer(renderer);
+  SDL_DestroyWindow(window);
+  Mix_CloseAudio();
+  Mix_Quit();
+  IMG_Quit();
+  SDL_Quit();
 }
