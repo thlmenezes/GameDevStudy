@@ -16,11 +16,17 @@ void Face::Damage(int damage)
   hitpoints = fmax(hitpoints - abs(damage), 0);
   Sound *sound = (Sound *)associated.GetComponent("Sound");
 
-  if (hitpoints < 1)
+  if (hitpoints < 1 && !associated.IsDead())
   {
     associated.RequestDelete();
     if (sound != nullptr)
+    {
       sound->Play();
+      // NOTE: GAMBIARRA
+      while (Mix_Playing(-1))
+      {
+      }
+    }
   }
 }
 
