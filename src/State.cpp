@@ -44,6 +44,14 @@ void State::LoadAssets()
 void State::Update(float dt)
 {
   Input();
+
+  for (auto it = objectArray.begin(); it < objectArray.end(); it++)
+  {
+    auto object = it->get();
+    object->Update(dt);
+    if (object->IsDead())
+      objectArray.erase(it, it + 1);
+  }
 }
 
 void State::Render()
