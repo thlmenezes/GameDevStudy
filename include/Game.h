@@ -1,7 +1,5 @@
 #ifndef HEADER_GAME
 #define HEADER_GAME
-  #include <iostream>
-
   using namespace std;
 
   #define INCLUDE_SDL_IMAGE

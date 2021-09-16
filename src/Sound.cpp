@@ -1,10 +1,9 @@
-#include <iostream>
 #include <exception>
 
 using namespace std;
 
 #include "Sound.h"
-#include "Game.h"
+#include "Component.h"
 #define INCLUDE_SDL_MIXER
 #include "SDL_include.h"
 

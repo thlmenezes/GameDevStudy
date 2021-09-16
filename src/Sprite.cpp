@@ -5,6 +5,7 @@ using namespace std;
 
 #include "Sprite.h"
 #include "Game.h"
+#include "Component.h"
 #define INCLUDE_SDL_IMAGE
 #include "SDL_include.h"
 #include "GameObject.h"

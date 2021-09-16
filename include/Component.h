@@ -1,7 +1,6 @@
 #ifndef HEADER_COMPONENT
 #define HEADER_COMPONENT
-  #include <iostream>
-
+  #include <string>
   using namespace std;
 
   class GameObject;

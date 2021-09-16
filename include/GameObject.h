@@ -1,6 +1,5 @@
 #ifndef HEADER_GAME_OBJECT
 #define HEADER_GAME_OBJECT
-  #include <iostream>
   #include <vector>
   #include <memory>
 

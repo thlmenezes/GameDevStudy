@@ -1,7 +1,5 @@
 #ifndef HEADER_SPRITE
 #define HEADER_SPRITE
-  #include <iostream>
-
   using namespace std;
 
   #define INCLUDE_SDL_IMAGE
