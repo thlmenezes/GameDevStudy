@@ -5,6 +5,11 @@ using namespace std;
 
 #include "Vec2.h"
 
+Vec2::Vec2()
+{
+  Vec2(0, 0);
+}
+
 Vec2::Vec2(int coord_x, int coord_y)
 {
   x = coord_x;

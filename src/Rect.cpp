@@ -5,6 +5,11 @@ using namespace std;
 
 #include "Rect.h"
 
+Rect::Rect()
+{
+  Rect(0, 0, 0, 0);
+}
+
 Rect::Rect(int coord_x, int coord_y, int width, int height)
 {
   x = coord_x;

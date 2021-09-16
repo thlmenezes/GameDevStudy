@@ -6,6 +6,7 @@
 
   class Rect {
     public:
+      Rect();
       Rect(int x, int y, int width, int height);
       float x,y,w,h;
       ~Rect();
