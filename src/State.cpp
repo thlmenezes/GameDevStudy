@@ -149,9 +149,16 @@ void State::AddObject(int mouseX, int mouseY)
   // TODO: no method to getWindow yet
   // int screenWidth, screenHeight;
   // SDL_GetWindowSize(Game::GetInstance().GetWindow(), &screenWidth, &screenHeight);
+  /* 
+    0,0 -------------- SW,0
+    |                   |
+    |                   |
+    |                   |
+    0,SH -------------- SW,SH
+  */
 
-  enemy->box.x = (int)fmin(mouseX + spriteHalfWidth, SCREEN_WIDTH - spriteWidth);
-  enemy->box.y = (int)fmin(mouseY + spriteHalfHeight, SCREEN_HEIGHT - spriteHeight);
+  enemy->box.x = (int)fmin(SCREEN_WIDTH - spriteWidth, fmax(mouseX - spriteHalfWidth, 0));
+  enemy->box.y = (int)fmin(SCREEN_HEIGHT - spriteHeight, fmax(mouseY - spriteHalfHeight, 0));
   enemy->box.w = spriteWidth;
   enemy->box.h = spriteHeight;
 
