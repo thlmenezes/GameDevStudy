@@ -1,14 +1,16 @@
 #ifndef HEADER_VEC2
 #define HEADER_VEC2
-  #include <iostream>
-
   using namespace std;
 
   class Vec2 {
     public:
+      float x,y;
+
       Vec2();
       Vec2(int x, int y);
-      float x,y;
+      Vec2 GetRotated(float angle);
       ~Vec2();
+
+      friend Vec2 operator + (Vec2 const &, Vec2 const &);
   };
 #endif
