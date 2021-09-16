@@ -7,6 +7,7 @@ using namespace std;
 #include "Game.h"
 #define INCLUDE_SDL_IMAGE
 #include "SDL_include.h"
+#include "GameObject.h"
 
 void Sprite::DestroyTexture()
 {
@@ -14,14 +15,13 @@ void Sprite::DestroyTexture()
     SDL_DestroyTexture(texture);
 }
 
-Sprite::Sprite()
+Sprite::Sprite(GameObject &associated) : Component(associated)
 {
   texture = nullptr;
 }
 
-Sprite::Sprite(string file)
+Sprite::Sprite(GameObject &associated, string file) : Sprite(associated)
 {
-  Sprite();
   Open(file);
 }
 
@@ -53,12 +53,16 @@ void Sprite::SetClip(int x, int y, int w, int h)
   clipRect.h = h;
 }
 
-void Sprite::Render(int x, int y)
+void Sprite::Update(float dt)
+{
+}
+
+void Sprite::Render()
 {
   SDL_Renderer *renderer = Game::GetInstance().GetRenderer();
   SDL_Rect dstrect;
-  dstrect.x = x;
-  dstrect.y = y;
+  dstrect.x = associated.box.x;
+  dstrect.y = associated.box.y;
   dstrect.w = clipRect.w;
   dstrect.h = clipRect.h;
 
@@ -67,6 +71,11 @@ void Sprite::Render(int x, int y)
       texture,
       &clipRect,
       &dstrect);
+}
+
+bool Sprite::Is(string type)
+{
+  return "Sprite" == type;
 }
 
 int Sprite::GetWidth()
