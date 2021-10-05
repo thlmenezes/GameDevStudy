@@ -21,6 +21,7 @@
                   int w, int h);
       void Update(float dt);
       void Render();
+      void Render(float x, float y);
       bool Is(string type);
       int GetWidth();
       int GetHeight();

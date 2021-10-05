@@ -58,20 +58,24 @@ void Sprite::Update(float dt)
 {
 }
 
-void Sprite::Render()
+void Sprite::Render(float x, float y)
 {
-  SDL_Renderer *renderer = Game::GetInstance().GetRenderer();
   SDL_Rect dstrect;
-  dstrect.x = associated.box.x;
-  dstrect.y = associated.box.y;
+  dstrect.x = x;
+  dstrect.y = y;
   dstrect.w = clipRect.w;
   dstrect.h = clipRect.h;
 
   SDL_RenderCopy(
-      renderer,
+      Game::GetInstance().GetRenderer(),
       texture,
       &clipRect,
       &dstrect);
+}
+
+void Sprite::Render()
+{
+  Render(associated.box.x, associated.box.y);
 }
 
 bool Sprite::Is(string type)
