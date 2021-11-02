@@ -9,7 +9,7 @@ using namespace std;
 TileMap::TileMap(GameObject &associated, string file, TileSet *tileSet) : Component(associated)
 {
   Load(file);
-  tileSet = tileSet;
+  this->tileSet = tileSet;
 }
 
 void TileMap::Load(string file)
@@ -35,7 +35,7 @@ void TileMap::Load(string file)
 
 void TileMap::SetTileSet(TileSet *tileSet)
 {
-  tileSet = tileSet;
+  this->tileSet = tileSet;
 }
 
 int &TileMap::At(int x, int y, int z)
