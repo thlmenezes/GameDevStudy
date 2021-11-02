@@ -12,6 +12,8 @@ using namespace std;
 #include "Game.h"
 #include "Sound.h"
 #include "Music.h"
+#include "TileSet.h"
+#include "TileMap.h"
 #define INCLUDE_SDL_IMAGE
 #define INCLUDE_SDL_MIXER
 #include "SDL_include.h"
@@ -32,6 +34,15 @@ void State::LoadAssets()
   bg = new Sprite(*background, "assets/img/ocean.jpg");
   background->AddComponent(bg);
   objectArray.emplace_back(background);
+
+  auto tilemap = new GameObject();
+  auto scenario = new TileMap(
+      *tilemap,
+      "assets/map/tileMap.txt",
+      new TileSet(64, 64, "assets/img/tileset.png"));
+
+  tilemap->AddComponent(scenario);
+  objectArray.emplace_back(tilemap);
 }
 
 void State::Update(float dt)
