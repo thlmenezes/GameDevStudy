@@ -49,18 +49,20 @@ void GameObject::RemoveComponent(Component *cpt)
   remove_if(
       components.begin(),
       components.end(),
-      [&cpt](unique_ptr<Component>& c){
+      [&cpt](unique_ptr<Component> &c)
+      {
         return c.get() == cpt;
       });
 }
 
 Component *GameObject::GetComponent(string type)
 {
-  Component * find_result = nullptr;
+  Component *find_result = nullptr;
 
   for (auto &component : components)
   {
-    if(component->Is(type)){
+    if (component->Is(type))
+    {
       find_result = component.get();
       break;
     }

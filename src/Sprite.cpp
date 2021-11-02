@@ -63,8 +63,8 @@ void Sprite::Render(float x, float y)
   SDL_Rect dstrect;
   dstrect.x = x;
   dstrect.y = y;
-  dstrect.w = clipRect.w;
-  dstrect.h = clipRect.h;
+  dstrect.w = GetWidth();
+  dstrect.h = GetHeight();
 
   SDL_RenderCopy(
       Game::GetInstance().GetRenderer(),

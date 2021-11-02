@@ -28,15 +28,9 @@ State::State() : bg(*new GameObject(), "assets/img/ocean.jpg")
 
 void State::LoadAssets()
 {
-  GameObject *associated = new GameObject();
-  associated->AddComponent(&bg);
-
-  associated->box.x = 0;
-  associated->box.y = 0;
-  associated->box.w = bg.GetWidth();
-  associated->box.h = bg.GetHeight();
-
-  objectArray.emplace_back(associated);
+  auto background = new GameObject();
+  background->AddComponent(&bg);
+  objectArray.emplace_back(background);
   music.Open("assets/audio/stageState.ogg");
   music.Play();
 }
