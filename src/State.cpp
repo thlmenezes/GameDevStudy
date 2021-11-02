@@ -19,20 +19,19 @@ using namespace std;
 #define SCREEN_WIDTH 1024
 #define SCREEN_HEIGHT 600
 
-State::State() : bg(*new GameObject(), "assets/img/ocean.jpg")
+State::State() : music("assets/audio/stageState.ogg")
 {
   quitRequested = false;
-  music = *new Music();
+  music.Play(-1);
   LoadAssets();
 }
 
 void State::LoadAssets()
 {
   auto background = new GameObject();
-  background->AddComponent(&bg);
+  bg = new Sprite(*background, "assets/img/ocean.jpg");
+  background->AddComponent(bg);
   objectArray.emplace_back(background);
-  music.Open("assets/audio/stageState.ogg");
-  music.Play();
 }
 
 void State::Update(float dt)
