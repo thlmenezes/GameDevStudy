@@ -8,19 +8,16 @@ using namespace std;
 TileSet::TileSet(int titleWidth, int titleHeight, string file) : tileSet(*new GameObject())
 {
   tileSet.Open(file);
-  tileWidth = titleWidth;
-  tileHeight = titleHeight;
+  this->tileWidth = titleWidth;
+  this->tileHeight = titleHeight;
   rows = tileSet.GetHeight() / tileHeight;
   columns = tileSet.GetWidth() / tileWidth;
 }
 
 void TileSet::RenderTile(unsigned int index, float x, float y)
 {
-  if (index > (unsigned int)(rows * columns - 1))
-  {
-    SDL_Log("Invalid attempt to RenderTile on index: %u", index);
-    exit(EXIT_FAILURE);
-  }
+  if (index > (unsigned int)(rows * columns))
+    return;
 
   int clipX = index % columns * tileWidth,
       clipY = index / columns * tileHeight;
