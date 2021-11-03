@@ -1,5 +1,6 @@
 #ifndef SOUND_H
   #define SOUND_H
+  #include <memory>
   using namespace std;
 
   #define INCLUDE_SDL_MIXER
@@ -8,7 +9,7 @@
   #include "Component.h"
   
   class Sound: public Component{
-    Mix_Chunk* chunk;
+    shared_ptr<Mix_Chunk> chunk;
     int channel;
 
     public:

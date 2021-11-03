@@ -1,5 +1,6 @@
 #ifndef SPRITE_H
   #define SPRITE_H
+  #include <memory>
   using namespace std;
 
   #define INCLUDE_SDL_IMAGE
@@ -7,11 +8,10 @@
   #include "Component.h"
 
   class Sprite: public Component {
-    SDL_Texture* texture;
+    shared_ptr<SDL_Texture> texture;
     int width;
     int height;
     SDL_Rect clipRect;
-    void DestroyTexture();
 
     public:
       Sprite(GameObject& associated);

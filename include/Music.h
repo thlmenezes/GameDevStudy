@@ -1,13 +1,14 @@
 #ifndef MUSIC_H
   #define MUSIC_H
   #include <string>
+  #include <memory>
   using namespace std;
 
   #define INCLUDE_SDL_MIXER
   #include "SDL_include.h"
 
   class Music{
-    Mix_Music* music;
+    shared_ptr<Mix_Music> music;
     public:
       Music();
       Music(string file);

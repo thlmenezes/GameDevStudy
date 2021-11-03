@@ -1,20 +1,12 @@
-#include <iostream>
-#include <exception>
-
 using namespace std;
 
 #include "Sprite.h"
 #include "Game.h"
 #include "Component.h"
+#include "Resources.h"
 #define INCLUDE_SDL_IMAGE
 #include "SDL_include.h"
 #include "GameObject.h"
-
-void Sprite::DestroyTexture()
-{
-  if (texture != nullptr)
-    SDL_DestroyTexture(texture);
-}
 
 Sprite::Sprite(GameObject &associated) : Component(associated)
 {
@@ -28,20 +20,14 @@ Sprite::Sprite(GameObject &associated, string file) : Sprite(associated)
 
 void Sprite::Open(string file)
 {
-  DestroyTexture();
   SDL_Renderer *renderer = Game::GetInstance().GetRenderer();
-  texture = IMG_LoadTexture(
-      renderer,
-      file.c_str());
+  texture = Resources::GetImage(file);
 
-  if (texture == nullptr)
+  if (SDL_QueryTexture(texture.get(), nullptr, nullptr, &width, &height))
   {
-    cerr << SDL_GetError();
-    throw_with_nested(runtime_error("IMG_LoadTexture with file: " + file));
+    SDL_Log("Could not query texture SDL_QueryTexture: %s", SDL_GetError());
+    exit(EXIT_FAILURE);
   }
-
-  if (SDL_QueryTexture(texture, nullptr, nullptr, &width, &height))
-    throw_with_nested(runtime_error("Invalid Texture with file: " + file));
 
   SetClip(0, 0, width, height);
 }
@@ -68,7 +54,7 @@ void Sprite::Render(float x, float y)
 
   SDL_RenderCopy(
       Game::GetInstance().GetRenderer(),
-      texture,
+      texture.get(),
       &clipRect,
       &dstrect);
 }
@@ -100,5 +86,4 @@ bool Sprite::IsOpen()
 
 Sprite::~Sprite()
 {
-  DestroyTexture();
 }

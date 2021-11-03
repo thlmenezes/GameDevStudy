@@ -1,10 +1,8 @@
-#include <iostream>
-#include <exception>
-
 using namespace std;
 
 #include "Music.h"
 #include "Game.h"
+#include "Resources.h"
 #define INCLUDE_SDL_MIXER
 #include "SDL_include.h"
 
@@ -21,17 +19,18 @@ Music::Music(string file)
 
 void Music::Open(string file)
 {
-  music = Mix_LoadMUS(file.c_str());
-  if (music == nullptr)
-    throw_with_nested(runtime_error("Mix_LoadMUS with file: " + file));
+  music = Resources::GetMusic(file);
 }
 
 void Music::Play(int times)
 {
   if (music == nullptr)
-    throw_with_nested(invalid_argument("Attempt to play uninitialized music"));
+  {
+    SDL_Log("Attempt to play uninitialized music");
+    exit(EXIT_FAILURE);
+  }
 
-  Mix_PlayMusic(music, times);
+  Mix_PlayMusic(music.get(), times);
 }
 
 void Music::Stop(int msToStop)
@@ -47,5 +46,5 @@ bool Music::IsOpen()
 Music::~Music()
 {
   Stop(0);
-  Mix_FreeMusic(music);
+  music = nullptr;
 }
