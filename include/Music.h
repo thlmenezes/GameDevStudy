@@ -1,5 +1,5 @@
-#ifndef HEADER_MUSIC
-#define HEADER_MUSIC
+#ifndef MUSIC_H
+  #define MUSIC_H
   using namespace std;
 
   #define INCLUDE_SDL_MIXER

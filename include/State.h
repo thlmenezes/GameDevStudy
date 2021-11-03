@@ -1,5 +1,5 @@
-#ifndef HEADER_STATE
-#define HEADER_STATE
+#ifndef STATE_H
+  #define STATE_H
   #include <vector>
   #include <memory>
 

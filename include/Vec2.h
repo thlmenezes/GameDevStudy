@@ -1,5 +1,5 @@
-#ifndef HEADER_VEC2
-#define HEADER_VEC2
+#ifndef VEC2_H
+  #define VEC2_H
   using namespace std;
 
   class Vec2 {

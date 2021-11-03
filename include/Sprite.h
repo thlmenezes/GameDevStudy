@@ -1,5 +1,5 @@
-#ifndef HEADER_SPRITE
-#define HEADER_SPRITE
+#ifndef SPRITE_H
+  #define SPRITE_H
   using namespace std;
 
   #define INCLUDE_SDL_IMAGE

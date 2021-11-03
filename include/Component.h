@@ -1,5 +1,5 @@
-#ifndef HEADER_COMPONENT
-#define HEADER_COMPONENT
+#ifndef COMPONENT_H
+  #define COMPONENT_H
   #include <string>
   using namespace std;
 

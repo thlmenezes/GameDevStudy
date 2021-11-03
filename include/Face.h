@@ -1,5 +1,5 @@
-#ifndef HEADER_FACE
-#define HEADER_FACE
+#ifndef FACE_H
+  #define FACE_H
   using namespace std;
 
   #include "GameObject.h"

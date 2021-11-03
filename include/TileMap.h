@@ -1,5 +1,5 @@
-#ifndef HEADER_TILEMAP
-#define HEADER_TILEMAP
+#ifndef TILEMAP_H
+  #define TILEMAP_H
   #include <iostream>
 
   using namespace std;

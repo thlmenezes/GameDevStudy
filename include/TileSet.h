@@ -1,5 +1,5 @@
-#ifndef HEADER_TILESET
-#define HEADER_TILESET
+#ifndef TILESET_H
+  #define TILESET_H
   #include <iostream>
 
   using namespace std;

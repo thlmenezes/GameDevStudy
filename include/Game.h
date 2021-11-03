@@ -1,5 +1,5 @@
-#ifndef HEADER_GAME
-#define HEADER_GAME
+#ifndef GAME_H
+  #define GAME_H
   using namespace std;
 
   #define INCLUDE_SDL_IMAGE

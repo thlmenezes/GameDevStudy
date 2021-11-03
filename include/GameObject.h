@@ -1,5 +1,5 @@
-#ifndef HEADER_GAME_OBJECT
-#define HEADER_GAME_OBJECT
+#ifndef GAME_OBJECT_H
+  #define GAME_OBJECT_H
   #include <vector>
   #include <memory>
 

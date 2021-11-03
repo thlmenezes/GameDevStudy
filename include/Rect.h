@@ -1,5 +1,5 @@
-#ifndef HEADER_RECT
-#define HEADER_RECT
+#ifndef RECT_H
+#define RECT_H
   #include <iostream>
   #include <initializer_list>
 
