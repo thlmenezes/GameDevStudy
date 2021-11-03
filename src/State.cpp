@@ -35,6 +35,8 @@ void State::LoadAssets()
   background->AddComponent(bg);
   objectArray.emplace_back(background);
 
+  return; // TODO: fix error on access TileSet::RenderTile (this=0x555555e04f50, index=4294967295, x=0, y=1280)
+
   auto tilemap = new GameObject();
   auto scenario = new TileMap(
       *tilemap,
