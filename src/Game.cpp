@@ -1,6 +1,3 @@
-#include <iostream>
-#include <exception>
-
 using namespace std;
 
 #include "Game.h"
@@ -12,24 +9,31 @@ using namespace std;
 Game::Game(string title, int width, int height)
 {
   if (instance != nullptr)
-    throw_with_nested(runtime_error("Singleton Error"));
+  {
+    SDL_Log("Singleton Error");
+    exit(EXIT_FAILURE);
+  }
+
   instance = this;
 
   if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER))
-    throw_with_nested(runtime_error(SDL_GetError()));
+  {
+    SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
+    exit(EXIT_FAILURE);
+  }
 
   const int sdl_image = IMG_Init(IMG_INIT_JPG);
   if (0 == sdl_image)
   {
-    cerr << sdl_image;
-    throw_with_nested(runtime_error("SDL Image Init"));
+    SDL_Log("Unable to initialize SDL_Image: %s", SDL_GetError());
+    exit(EXIT_FAILURE);
   }
 
   const int sdl_mix = Mix_Init(MIX_INIT_OGG);
   if (0 == sdl_mix)
   {
-    cerr << sdl_mix;
-    throw_with_nested(runtime_error("MIX Audio Init"));
+    SDL_Log("Unable to initialize SDL_Mix: %s", SDL_GetError());
+    exit(EXIT_FAILURE);
   }
 
   const int CHUNK_SIZE = 1024;
@@ -39,7 +43,10 @@ Game::Game(string title, int width, int height)
           MIX_DEFAULT_FORMAT,
           MIX_DEFAULT_CHANNELS,
           CHUNK_SIZE))
-    throw_with_nested(runtime_error("MIX Open Audio"));
+  {
+    SDL_Log("Unable to open audio channel Mix_OpenAudio: %s", SDL_GetError());
+    exit(EXIT_FAILURE);
+  }
 
   const int NUM_CHANNELS = 32;
   Mix_AllocateChannels(NUM_CHANNELS);
@@ -54,7 +61,10 @@ Game::Game(string title, int width, int height)
       WINDOW_FLAGS);
 
   if (window == nullptr)
-    throw_with_nested(runtime_error("SDL Create Window"));
+  {
+    SDL_Log("Unable to create window SDL_CreateWindow: %s", SDL_GetError());
+    exit(EXIT_FAILURE);
+  }
 
   const int RENDERER_INDEX = -1;
   renderer = SDL_CreateRenderer(
@@ -63,7 +73,10 @@ Game::Game(string title, int width, int height)
       SDL_RENDERER_ACCELERATED);
 
   if (renderer == nullptr)
-    throw_with_nested(runtime_error("SDL Create Renderer"));
+  {
+    SDL_Log("Unable to create renderer SDL_CreateRenderer: %s", SDL_GetError());
+    exit(EXIT_FAILURE);
+  }
 
   state = new State();
 }

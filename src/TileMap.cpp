@@ -1,5 +1,3 @@
-#include <iostream>
-#include <exception>
 #include <fstream>
 
 using namespace std;
@@ -17,7 +15,10 @@ void TileMap::Load(string file)
   ifstream rs(file, ios::in);
 
   if (!rs.is_open())
-    throw_with_nested(runtime_error("Error opening file: " + file));
+  {
+    SDL_Log("Unable to open file: %s", file);
+    exit(EXIT_FAILURE);
+  }
 
   char c;
 

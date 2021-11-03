@@ -18,7 +18,10 @@ TileSet::TileSet(int titleWidth, int titleHeight, string file) : tileSet(*new Ga
 void TileSet::RenderTile(unsigned int index, float x, float y)
 {
   if (index > (unsigned int)(rows * columns - 1))
-    throw_with_nested(runtime_error("Invalid RenderTile on index: " + index));
+  {
+    SDL_Log("Invalid attempt to RenderTile on index: %d", index);
+    exit(EXIT_FAILURE);
+  }
 
   int clipX = index % columns * tileWidth,
       clipY = index / columns * tileHeight;
