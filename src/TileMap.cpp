@@ -47,11 +47,11 @@ int &TileMap::At(int x, int y, int z)
 
 void TileMap::RenderLayer(int layer, int cameraX, int cameraY)
 {
-  for (int x = 0; x < mapWidth; x++)
-    for (int y = 0; y < mapHeight; y++)
+  for (int y = 0; y < mapHeight; y++)
+    for (int x = 0; x < mapWidth; x++)
     {
-      int xPos = x * tileSet->GetTileWidth() + cameraX;
-      int yPos = y * tileSet->GetTileHeight() + cameraY;
+      int xPos = x * tileSet->GetTileWidth() - cameraX;
+      int yPos = y * tileSet->GetTileHeight() - cameraY;
       tileSet->RenderTile(At(x, y, layer), xPos, yPos);
     }
 }
@@ -62,11 +62,8 @@ void TileMap::Update(float dt)
 
 void TileMap::Render()
 {
-  int cameraX = associated.box.x;
-  int cameraY = associated.box.y;
-
   for (int layer = 0; layer < mapDepth; layer++)
-    RenderLayer(layer, cameraX, cameraY);
+    RenderLayer(layer, 0, 0);
 }
 
 bool TileMap::Is(string type)

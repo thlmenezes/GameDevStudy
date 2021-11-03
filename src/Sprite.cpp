@@ -8,9 +8,8 @@ using namespace std;
 #include "SDL_include.h"
 #include "GameObject.h"
 
-Sprite::Sprite(GameObject &associated) : Component(associated)
+Sprite::Sprite(GameObject &associated) : Component(associated), texture(nullptr)
 {
-  texture = nullptr;
 }
 
 Sprite::Sprite(GameObject &associated, string file) : Sprite(associated)
@@ -86,4 +85,5 @@ bool Sprite::IsOpen()
 
 Sprite::~Sprite()
 {
+  texture = nullptr;
 }
