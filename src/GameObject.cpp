@@ -1,7 +1,4 @@
-#include <iostream>
-#include <exception>
 #include <algorithm>
-#include <typeinfo>
 #include <functional>
 
 using namespace std;

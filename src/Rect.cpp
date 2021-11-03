@@ -1,6 +1,3 @@
-#include <iostream>
-#include <exception>
-
 using namespace std;
 
 #include "Rect.h"

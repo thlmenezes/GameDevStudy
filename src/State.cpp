@@ -1,5 +1,3 @@
-#include <iostream>
-#include <exception>
 #include <cmath>
 
 using namespace std;
