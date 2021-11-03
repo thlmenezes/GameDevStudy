@@ -18,7 +18,7 @@ void TileSet::RenderTile(unsigned int index, float x, float y)
 {
   if (index > (unsigned int)(rows * columns - 1))
   {
-    SDL_Log("Invalid attempt to RenderTile on index: %d", index);
+    SDL_Log("Invalid attempt to RenderTile on index: %u", index);
     exit(EXIT_FAILURE);
   }
 
