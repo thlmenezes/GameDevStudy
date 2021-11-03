@@ -1,7 +1,6 @@
 #ifndef TILEMAP_H
   #define TILEMAP_H
-  #include <iostream>
-
+  #include <string>
   using namespace std;
 
   #include "TileSet.h"

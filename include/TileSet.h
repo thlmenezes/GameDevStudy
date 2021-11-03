@@ -1,7 +1,6 @@
 #ifndef TILESET_H
   #define TILESET_H
-  #include <iostream>
-
+  #include <string>
   using namespace std;
 
   #include "Sprite.h"

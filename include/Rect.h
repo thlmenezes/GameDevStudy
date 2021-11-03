@@ -1,6 +1,5 @@
 #ifndef RECT_H
 #define RECT_H
-  #include <iostream>
   #include <initializer_list>
 
   using namespace std;
