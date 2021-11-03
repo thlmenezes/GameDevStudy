@@ -16,7 +16,7 @@ void TileMap::Load(string file)
 
   if (!rs.is_open())
   {
-    SDL_Log("Unable to open file: %s", file);
+    SDL_Log("Unable to open file: %s", file.c_str());
     exit(EXIT_FAILURE);
   }
 
