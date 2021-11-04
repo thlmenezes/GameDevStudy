@@ -12,10 +12,10 @@
   #include "SDL_include.h"
 
   class Resources {
-    private:
-      static unordered_map<string, shared_ptr<SDL_Texture>> imageTable;
-      static unordered_map<string, shared_ptr<Mix_Music>> musicTable;
-      static unordered_map<string, shared_ptr<Mix_Chunk>> soundTable;
+    static unordered_map<string, shared_ptr<SDL_Texture>> imageTable;
+    static unordered_map<string, shared_ptr<Mix_Music>> musicTable;
+    static unordered_map<string, shared_ptr<Mix_Chunk>> soundTable;
+
     public:
       static shared_ptr<SDL_Texture> GetImage(string file);
       static void ClearImages();
