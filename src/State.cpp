@@ -14,6 +14,7 @@ using namespace std;
 #include "TileMap.h"
 #include "InputManager.h"
 #include "Camera.h"
+#include "CameraFollower.h"
 #define INCLUDE_SDL_IMAGE
 #define INCLUDE_SDL_MIXER
 #include "SDL_include.h"
@@ -34,6 +35,7 @@ void State::LoadAssets()
   auto background = new GameObject();
   bg = new Sprite(*background, "assets/img/ocean.jpg");
   background->AddComponent(bg);
+  background->AddComponent(new CameraFollower(*background));
   objectArray.emplace_back(background);
 
   auto tilemap = new GameObject();
