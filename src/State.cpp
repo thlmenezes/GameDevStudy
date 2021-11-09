@@ -19,7 +19,8 @@ using namespace std;
 #define SCREEN_WIDTH 1024
 #define SCREEN_HEIGHT 600
 
-State::State() : music("assets/audio/stageState.ogg")
+State::State()
+    : music("assets/audio/stageState.ogg")
 {
   quitRequested = false;
   music.Play(-1);

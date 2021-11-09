@@ -8,18 +8,19 @@ using namespace std;
 #include "SDL_include.h"
 #include "GameObject.h"
 
-Sprite::Sprite(GameObject &associated) : Component(associated), texture(nullptr)
+Sprite::Sprite(GameObject &associated)
+    : Component(associated), texture(nullptr)
 {
 }
 
-Sprite::Sprite(GameObject &associated, string file) : Sprite(associated)
+Sprite::Sprite(GameObject &associated, string file)
+    : Sprite(associated)
 {
   Open(file);
 }
 
 void Sprite::Open(string file)
 {
-  SDL_Renderer *renderer = Game::GetInstance().GetRenderer();
   texture = Resources::GetImage(file);
 
   if (SDL_QueryTexture(texture.get(), nullptr, nullptr, &width, &height))
@@ -39,9 +40,7 @@ void Sprite::SetClip(int x, int y, int w, int h)
   clipRect.h = h;
 }
 
-void Sprite::Update(float dt)
-{
-}
+void Sprite::Update(float dt) {}
 
 void Sprite::Render(float x, float y)
 {

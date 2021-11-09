@@ -5,7 +5,8 @@ using namespace std;
 #include "TileSet.h"
 #include "GameObject.h"
 
-TileSet::TileSet(int titleWidth, int titleHeight, string file) : tileSet(*new GameObject())
+TileSet::TileSet(int titleWidth, int titleHeight, string file)
+    : tileSet(*new GameObject())
 {
   tileSet.Open(file);
   this->tileWidth = titleWidth;
@@ -35,6 +36,4 @@ int TileSet::GetTileHeight()
   return tileHeight;
 }
 
-TileSet::~TileSet()
-{
-}
+TileSet::~TileSet() {}

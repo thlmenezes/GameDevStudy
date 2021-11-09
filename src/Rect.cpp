@@ -2,7 +2,8 @@ using namespace std;
 
 #include "Rect.h"
 
-Rect::Rect() : Rect(0, 0, 0, 0)
+Rect::Rect()
+    : Rect(0, 0, 0, 0)
 {
 }
 
@@ -30,6 +31,4 @@ bool Rect::Contains(initializer_list<float> mouse)
   return !outside;
 }
 
-Rect::~Rect()
-{
-}
+Rect::~Rect() {}

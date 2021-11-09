@@ -5,7 +5,8 @@ using namespace std;
 
 #include "Vec2.h"
 
-Vec2::Vec2() : Vec2(0, 0)
+Vec2::Vec2()
+    : Vec2(0, 0)
 {
 }
 
@@ -23,9 +24,7 @@ Vec2 Vec2::GetRotated(float angle)
   return Vec2(newX, newY);
 }
 
-Vec2::~Vec2()
-{
-}
+Vec2::~Vec2() {}
 
 Vec2 operator+(Vec2 const &v1, Vec2 const &v2)
 {

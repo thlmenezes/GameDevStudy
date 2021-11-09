@@ -6,12 +6,14 @@ using namespace std;
 #define INCLUDE_SDL_MIXER
 #include "SDL_include.h"
 
-Sound::Sound(GameObject &associated) : Component(associated)
+Sound::Sound(GameObject &associated)
+    : Component(associated)
 {
   chunk = nullptr;
 }
 
-Sound::Sound(GameObject &associated, string file) : Sound(associated)
+Sound::Sound(GameObject &associated, string file)
+    : Sound(associated)
 {
   Open(file);
 }
@@ -50,13 +52,9 @@ bool Sound::IsOpen()
   return chunk != nullptr;
 }
 
-void Sound::Update(float dt)
-{
-}
+void Sound::Update(float dt) {}
 
-void Sound::Render()
-{
-}
+void Sound::Render() {}
 
 bool Sound::Is(string type)
 {

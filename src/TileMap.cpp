@@ -4,7 +4,8 @@ using namespace std;
 
 #include "TileMap.h"
 
-TileMap::TileMap(GameObject &associated, string file, TileSet *tileSet) : Component(associated)
+TileMap::TileMap(GameObject &associated, string file, TileSet *tileSet)
+    : Component(associated)
 {
   Load(file);
   this->tileSet = tileSet;
@@ -56,9 +57,7 @@ void TileMap::RenderLayer(int layer, int cameraX, int cameraY)
     }
 }
 
-void TileMap::Update(float dt)
-{
-}
+void TileMap::Update(float dt) {}
 
 void TileMap::Render()
 {
@@ -86,6 +85,4 @@ int TileMap::GetDepth()
   return mapDepth;
 }
 
-TileMap::~TileMap()
-{
-}
+TileMap::~TileMap() {}
