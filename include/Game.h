@@ -13,12 +13,17 @@
     SDL_Renderer* renderer;
     State* state;
 
+    int frameStart;
+    float dt;
+    void CalculateDeltaTime();
+
     Game(string title, int width, int height);
     public:
       static Game& GetInstance();
       void Run();
       SDL_Renderer* GetRenderer();
       State& GetState();
+      float GetDeltaTime();
       ~Game();
   };
 #endif

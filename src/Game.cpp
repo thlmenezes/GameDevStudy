@@ -8,6 +8,7 @@ using namespace std;
 #include "SDL_include.h"
 
 Game::Game(string title, int width, int height)
+    : dt(0), frameStart(0)
 {
   if (instance != nullptr)
   {
@@ -98,8 +99,9 @@ void Game::Run()
 {
   while (!state->QuitRequested())
   {
+    CalculateDeltaTime();
     InputManager::GetInstance().Update();
-    state->Update(0);
+    state->Update(GetDeltaTime());
     state->Render();
     SDL_RenderPresent(renderer);
     SDL_Delay(33);
@@ -114,6 +116,17 @@ SDL_Renderer *Game::GetRenderer()
 State &Game::GetState()
 {
   return *state;
+}
+
+void Game::CalculateDeltaTime()
+{
+  dt = SDL_GetTicks() - frameStart;
+  frameStart += dt;
+}
+
+float Game::GetDeltaTime()
+{
+  return dt / 1000;
 }
 
 Game::~Game()
