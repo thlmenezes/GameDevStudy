@@ -5,6 +5,7 @@ using namespace std;
 #include "Face.h"
 #include "Sound.h"
 #include "Component.h"
+#include "InputManager.h"
 
 Face::Face(GameObject &associated)
     : Component(associated)
@@ -31,7 +32,17 @@ void Face::Damage(int damage)
   }
 }
 
-void Face::Update(float dt) {}
+void Face::Update(float dt)
+{
+  if (!InputManager::GetInstance().MousePress(LEFT_MOUSE_BUTTON))
+    return;
+
+  int mouseX = InputManager::GetInstance().GetMouseX(),
+      mouseY = InputManager::GetInstance().GetMouseY();
+
+  if (associated.box.Contains({(float)mouseX, (float)mouseY}))
+    Damage(rand() % 10 + 10);
+}
 
 void Face::Render() {}
 

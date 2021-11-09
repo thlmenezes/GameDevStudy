@@ -2,6 +2,7 @@ using namespace std;
 
 #include "Game.h"
 #include "State.h"
+#include "InputManager.h"
 #define INCLUDE_SDL_IMAGE
 #define INCLUDE_SDL_MIXER
 #include "SDL_include.h"
@@ -97,6 +98,7 @@ void Game::Run()
 {
   while (!state->QuitRequested())
   {
+    InputManager::GetInstance().Update();
     state->Update(0);
     state->Render();
     SDL_RenderPresent(renderer);
