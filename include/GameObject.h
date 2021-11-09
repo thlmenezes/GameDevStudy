@@ -14,8 +14,10 @@
 
     public:
       Rect box;
+      bool started;
 
       GameObject();
+      void Start();
       void Update(float dt);
       void Render();
       bool IsDead();

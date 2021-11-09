@@ -23,15 +23,15 @@ using namespace std;
 #define SCREEN_HEIGHT 600
 
 State::State()
-    : music("assets/audio/stageState.ogg")
+    : music("assets/audio/stageState.ogg"),
+      started(false),
+      quitRequested(false)
 {
-  quitRequested = false;
-  music.Play(-1);
-  LoadAssets();
 }
 
 void State::LoadAssets()
 {
+  music.Play(-1);
   auto background = new GameObject();
   bg = new Sprite(*background, "assets/img/ocean.jpg");
   background->AddComponent(bg);
@@ -46,6 +46,33 @@ void State::LoadAssets()
 
   tilemap->AddComponent(scenario);
   objectArray.emplace_back(tilemap);
+}
+
+void State::Start()
+{
+  LoadAssets();
+
+  for (auto &object : objectArray)
+    object->Start();
+
+  started = true;
+}
+
+weak_ptr<GameObject> State::AddObject(GameObject *go)
+{
+  shared_ptr<GameObject> shared = shared_ptr<GameObject>(go);
+  State::objectArray.push_back(shared);
+  if (State::started)
+    shared->Start();
+  return shared;
+}
+
+weak_ptr<GameObject> State::GetObjectPtr(GameObject *go)
+{
+  for (auto it = objectArray.begin(); it < objectArray.end(); it++)
+    if (it->get() == go)
+      return *it;
+  return weak_ptr<GameObject>();
 }
 
 void State::Update(float dt)

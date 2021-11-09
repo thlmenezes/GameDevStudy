@@ -14,11 +14,15 @@
     Music music;
     Sprite* bg;
     void AddObject(int mouseX, int mouseY);
-    vector<unique_ptr<GameObject>> objectArray;
+    vector<shared_ptr<GameObject>> objectArray; 
+    bool started;
 
     public:
       State();
       void LoadAssets();
+      void Start();
+      weak_ptr<GameObject> AddObject(GameObject* go);
+      weak_ptr<GameObject> GetObjectPtr(GameObject* go);
       void Update(float dt);
       void Render();
       bool QuitRequested();
