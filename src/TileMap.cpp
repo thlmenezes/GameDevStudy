@@ -3,6 +3,7 @@
 using namespace std;
 
 #include "TileMap.h"
+#include "Camera.h"
 
 TileMap::TileMap(GameObject &associated, string file, TileSet *tileSet)
     : Component(associated)
@@ -62,7 +63,7 @@ void TileMap::Update(float dt) {}
 void TileMap::Render()
 {
   for (int layer = 0; layer < mapDepth; layer++)
-    RenderLayer(layer, 0, 0);
+    RenderLayer(layer, Camera::pos.x, Camera::pos.y);
 }
 
 bool TileMap::Is(string type)

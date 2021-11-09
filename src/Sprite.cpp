@@ -4,6 +4,7 @@ using namespace std;
 #include "Game.h"
 #include "Component.h"
 #include "Resources.h"
+#include "Camera.h"
 #define INCLUDE_SDL_IMAGE
 #include "SDL_include.h"
 #include "GameObject.h"
@@ -59,7 +60,7 @@ void Sprite::Render(float x, float y)
 
 void Sprite::Render()
 {
-  Render(associated.box.x, associated.box.y);
+  Render(associated.box.x - Camera::pos.x, associated.box.y - Camera::pos.y);
 }
 
 bool Sprite::Is(string type)

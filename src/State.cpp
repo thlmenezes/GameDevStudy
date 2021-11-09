@@ -13,6 +13,7 @@ using namespace std;
 #include "TileSet.h"
 #include "TileMap.h"
 #include "InputManager.h"
+#include "Camera.h"
 #define INCLUDE_SDL_IMAGE
 #define INCLUDE_SDL_MIXER
 #include "SDL_include.h"
@@ -58,6 +59,8 @@ void State::Update(float dt)
     Vec2 objPos = Vec2(200, 0).GetRotated(-PI + PI * (rand() % 1001) / 500.0) + Vec2(mouseX, mouseY);
     AddObject((int)objPos.x, (int)objPos.y);
   }
+
+  Camera::Update(dt);
 
   for (auto it = objectArray.begin(); it < objectArray.end(); it++)
   {
@@ -108,8 +111,8 @@ void State::AddObject(int mouseX, int mouseY)
     0,SH -------------- SW,SH
   */
 
-  enemy->box.x = (int)fmin(SCREEN_WIDTH - spriteWidth, fmax(mouseX - spriteHalfWidth, 0));
-  enemy->box.y = (int)fmin(SCREEN_HEIGHT - spriteHeight, fmax(mouseY - spriteHalfHeight, 0));
+  enemy->box.x = (int)fmin(SCREEN_WIDTH - spriteWidth, fmax(mouseX - spriteHalfWidth, 0)) + Camera::pos.x;
+  enemy->box.y = (int)fmin(SCREEN_HEIGHT - spriteHeight, fmax(mouseY - spriteHalfHeight, 0)) + Camera::pos.y;
   enemy->box.w = spriteWidth;
   enemy->box.h = spriteHeight;
 
