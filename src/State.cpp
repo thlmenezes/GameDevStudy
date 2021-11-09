@@ -4,7 +4,6 @@ using namespace std;
 
 #include "State.h"
 #include "Sprite.h"
-#include "Face.h"
 #include "Vec2.h"
 #include "GameObject.h"
 #include "Game.h"
@@ -80,15 +79,6 @@ void State::Update(float dt)
   quitRequested = InputManager::GetInstance().QuitRequested() ||
                   InputManager::GetInstance().KeyPress(ESCAPE_KEY);
 
-  if (InputManager::GetInstance().KeyPress(SPACE_KEY))
-  {
-    int mouseX = InputManager::GetInstance().GetMouseX(),
-        mouseY = InputManager::GetInstance().GetMouseY();
-
-    Vec2 objPos = Vec2(200, 0).GetRotated(-PI + PI * (rand() % 1001) / 500.0) + Vec2(mouseX, mouseY);
-    AddObject((int)objPos.x, (int)objPos.y);
-  }
-
   Camera::Update(dt);
 
   for (auto it = objectArray.begin(); it < objectArray.end(); it++)
@@ -116,37 +106,4 @@ bool State::QuitRequested()
 State::~State()
 {
   objectArray.clear();
-}
-
-void State::AddObject(int mouseX, int mouseY)
-{
-  GameObject *enemy = new GameObject();
-  Sprite *enemySprite = new Sprite(*enemy, "assets/img/penguinface.png");
-  enemy->AddComponent(enemySprite);
-
-  int spriteWidth = enemySprite->GetWidth();
-  int spriteHeight = enemySprite->GetHeight();
-  int spriteHalfWidth = (int)rint(spriteWidth / 2);
-  int spriteHalfHeight = (int)rint(spriteHeight / 2);
-
-  // TODO: no method to getWindow yet
-  // int screenWidth, screenHeight;
-  // SDL_GetWindowSize(Game::GetInstance().GetWindow(), &screenWidth, &screenHeight);
-  /* 
-    0,0 -------------- SW,0
-    |                   |
-    |                   |
-    |                   |
-    0,SH -------------- SW,SH
-  */
-
-  enemy->box.x = (int)fmin(SCREEN_WIDTH - spriteWidth, fmax(mouseX - spriteHalfWidth, 0)) + Camera::pos.x;
-  enemy->box.y = (int)fmin(SCREEN_HEIGHT - spriteHeight, fmax(mouseY - spriteHalfHeight, 0)) + Camera::pos.y;
-  enemy->box.w = spriteWidth;
-  enemy->box.h = spriteHeight;
-
-  enemy->AddComponent(new Sound(*enemy, "assets/audio/boom.wav"));
-  enemy->AddComponent(new Face(*enemy));
-
-  objectArray.emplace_back(enemy);
 }
