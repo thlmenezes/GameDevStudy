@@ -14,6 +14,7 @@ using namespace std;
 #include "InputManager.h"
 #include "Camera.h"
 #include "CameraFollower.h"
+#include "Alien.h"
 #define INCLUDE_SDL_IMAGE
 #define INCLUDE_SDL_MIXER
 #include "SDL_include.h"
@@ -45,6 +46,12 @@ void State::LoadAssets()
 
   tilemap->AddComponent(scenario);
   objectArray.emplace_back(tilemap);
+
+  auto alien = new GameObject();
+  auto et = new Alien(*alien, 0);
+  alien->box.SetCenter(512, 300);
+  alien->AddComponent(et);
+  objectArray.emplace_back(alien);
 }
 
 void State::Start()
