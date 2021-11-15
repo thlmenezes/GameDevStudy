@@ -1,6 +1,7 @@
 using namespace std;
 
 #include "Rect.h"
+#include "Vec2.h"
 
 Rect::Rect()
     : Rect(0, 0, 0, 0)
@@ -29,6 +30,23 @@ bool Rect::Contains(initializer_list<float> mouse)
                  mouseY > y + h ||
                  mouseY < y;
   return !outside;
+}
+
+void Rect::SetCenter(float x, float y)
+{
+
+  Rect::x = x - (w / 2);
+  Rect::y = y - (h / 2);
+}
+
+void Rect::SetCenter(Vec2 center)
+{
+  SetCenter(center.x, center.y);
+}
+
+Vec2 Rect::GetCenter()
+{
+  return Vec2(x + (w / 2), y + (h / 2));
 }
 
 Rect::~Rect() {}

@@ -4,6 +4,8 @@
 
   using namespace std;
 
+  #include "Vec2.h"
+
   class Rect {
     public:
       float x,y,w,h;
@@ -11,6 +13,9 @@
       Rect();
       Rect(int x, int y, int width, int height);
       bool Contains(initializer_list<float> mouse);
+      void SetCenter(float x, float y);
+      void SetCenter(Vec2 center);
+      Vec2 GetCenter();
       ~Rect();
   };
 #endif

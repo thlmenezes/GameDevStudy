@@ -1,5 +1,5 @@
 #include <exception>
-#include <math.h>
+#include <cmath>
 
 using namespace std;
 
@@ -24,9 +24,39 @@ Vec2 Vec2::GetRotated(float angle)
   return Vec2(newX, newY);
 }
 
+float Vec2::GetDX(float x)
+{
+  return x - Vec2::x;
+}
+
+float Vec2::GetDY(float y)
+{
+  return y - Vec2::y;
+}
+
+float Vec2::GetDS(Vec2 pos)
+{
+  return pow(pow(GetDX(pos.x), 2) + pow(GetDY(pos.y), 2), 0.5);
+}
+
+float Vec2::GetCos(Vec2 pos)
+{
+  return GetDX(pos.x) / GetDS(pos);
+}
+
+float Vec2::GetSin(Vec2 pos)
+{
+  return GetDY(pos.y) / GetDS(pos);
+}
+
 Vec2::~Vec2() {}
 
 Vec2 operator+(Vec2 const &v1, Vec2 const &v2)
 {
   return Vec2(v1.x + v2.x, v1.y + v2.y);
+}
+
+bool operator==(Vec2 const &v1, Vec2 const &v2)
+{
+  return v1.x == v2.x && v1.y == v2.y;
 }
