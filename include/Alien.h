@@ -15,7 +15,11 @@
     class Action {
       public:
         enum ActionType { MOVE, SHOOT };
-        Action (ActionType type, float x, float y);
+        Action (ActionType type, float x, float y) {
+          this->type = type;
+          pos.x = x;
+          pos.y = y;
+        };
         ActionType type;
         Vec2 pos;
     };
