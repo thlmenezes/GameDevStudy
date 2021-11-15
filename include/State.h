@@ -13,7 +13,6 @@
     bool quitRequested;
     Music music;
     Sprite* bg;
-    void AddObject(int mouseX, int mouseY);
     vector<shared_ptr<GameObject>> objectArray; 
     bool started;
 

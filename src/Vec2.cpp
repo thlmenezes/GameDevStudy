@@ -5,6 +5,8 @@ using namespace std;
 
 #include "Vec2.h"
 
+#define PI 3.141592
+
 Vec2::Vec2()
     : Vec2(0, 0)
 {
@@ -59,4 +61,14 @@ Vec2 operator+(Vec2 const &v1, Vec2 const &v2)
 bool operator==(Vec2 const &v1, Vec2 const &v2)
 {
   return v1.x == v2.x && v1.y == v2.y;
+}
+
+float Vec2::Cos(float rad)
+{
+  return cos(rad * PI / 180);
+}
+
+float Vec2::Sin(float rad)
+{
+  return sin(rad * PI / 180);
 }
