@@ -26,6 +26,7 @@
 
     int hp;
     Vec2 speed;
+    int nMinions;
 
     vector<weak_ptr<GameObject>> minionArray;
 

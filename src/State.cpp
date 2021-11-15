@@ -49,6 +49,7 @@ void State::LoadAssets()
 
   auto alien = new GameObject();
   auto et = new Alien(*alien, 0);
+  // TODO: auto et = new Alien(*alien, 1);
   alien->box.SetCenter(512, 300);
   alien->AddComponent(et);
   objectArray.emplace_back(alien);

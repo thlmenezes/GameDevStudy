@@ -4,14 +4,35 @@ using namespace std;
 #include "Sprite.h"
 #include "InputManager.h"
 #include "Camera.h"
+#include "Minion.h"
+#include "Game.h"
+
+#define loop(x, n) for (int x = 0; x < n; ++x)
 
 Alien::Alien(GameObject &associated, int nMinions)
-    : Component(associated), speed(Vec2()), hp(10)
+    : Component(associated),
+      speed(Vec2()),
+      hp(10),
+      nMinions(nMinions)
 {
   associated.AddComponent(new Sprite(associated, "assets/img/alien.png"));
 }
 
-void Alien::Start() {}
+void Alien::Start()
+{
+  // TODO: not working yet 9/11
+  loop(i, nMinions)
+  {
+    GameObject *minion = new GameObject();
+    minion->AddComponent(new Minion(
+        *minion,
+        weak_ptr<GameObject>(
+            shared_ptr<GameObject>(&associated)),
+        i * (360 / nMinions)));
+    minionArray.push_back(
+        Game::GetInstance().GetState().AddObject(minion));
+  }
+}
 
 void Alien::Update(float dt)
 {
