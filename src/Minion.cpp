@@ -10,9 +10,9 @@ using namespace std;
 #include "Bullet.h"
 #include "State.h"
 
-Minion::Minion(GameObject &associated, weak_ptr<GameObject> alienCenter, float arcOffsetDeg)
+Minion::Minion(GameObject &associated, GameObject& alienCenter, float arcOffsetDeg)
     : Component(associated),
-      alienCenter(*alienCenter.lock()),
+      alienCenter(alienCenter),
       arc(arcOffsetDeg)
 {
   associated.AddComponent(new Sprite(associated, "assets/img/minion.png"));

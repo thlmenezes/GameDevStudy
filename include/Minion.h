@@ -14,7 +14,7 @@
 
     public:
 
-      Minion(GameObject& associated, weak_ptr<GameObject> alienCenter, float arcOffsetDeg = 0);
+      Minion(GameObject& associated, GameObject& alienCenter, float arcOffsetDeg = 0);
 
       void Shoot(Vec2 target);
       void Update(float dt);

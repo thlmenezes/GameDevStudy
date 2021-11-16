@@ -20,14 +20,12 @@ Alien::Alien(GameObject &associated, int nMinions)
 
 void Alien::Start()
 {
-  // TODO: not working yet 9/11
   loop(i, nMinions)
   {
     GameObject *minion = new GameObject();
     minion->AddComponent(new Minion(
         *minion,
-        weak_ptr<GameObject>(
-            shared_ptr<GameObject>(&associated)),
+        associated,
         i * (360 / nMinions)));
     minionArray.push_back(
         Game::GetInstance().GetState().AddObject(minion));
