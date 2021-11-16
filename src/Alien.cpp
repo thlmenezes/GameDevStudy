@@ -7,7 +7,7 @@ using namespace std;
 #include "Minion.h"
 #include "Game.h"
 
-#define loop(x, n) for (int x = 0; x < n; ++x)
+#define loop(x, n) for (unsigned int x = 0; x < (unsigned int)n; ++x)
 
 Alien::Alien(GameObject &associated, int nMinions)
     : Component(associated),
@@ -55,7 +55,14 @@ void Alien::Update(float dt)
 
   if (act.type == act.SHOOT)
   {
-    ((Minion *)minionArray[rand() % nMinions].lock()->GetComponent("Minion"))->Shoot(dest);
+    if (minionArray.empty())
+      return;
+
+    ((Minion *)(minionArray[rand() % nMinions]
+                    .lock()
+                    ->GetComponent("Minion")))
+        ->Shoot(dest);
+
     taskQueue.pop();
     return;
   }
