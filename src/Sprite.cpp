@@ -60,8 +60,8 @@ void Sprite::Render(float x, float y)
   SDL_Rect dstrect;
   dstrect.x = x;
   dstrect.y = y;
-  dstrect.w = clipRect.w;
-  dstrect.h = clipRect.h;
+  dstrect.w = (int)clipRect.w * scale.x;
+  dstrect.h = (int)clipRect.h * scale.y;
 
   SDL_RenderCopyEx(
       Game::GetInstance().GetRenderer(),
@@ -85,12 +85,12 @@ bool Sprite::Is(string type)
 
 int Sprite::GetWidth()
 {
-  return width * scale.x;
+  return (int)width * scale.x;
 }
 
 int Sprite::GetHeight()
 {
-  return height * scale.y;
+  return (int)height * scale.y;
 }
 
 Vec2 Sprite::GetScale()
