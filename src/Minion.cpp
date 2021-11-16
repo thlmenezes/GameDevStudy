@@ -15,13 +15,16 @@ Minion::Minion(GameObject &associated, GameObject &alienCenter, float arcOffsetD
       alienCenter(alienCenter),
       arc(arcOffsetDeg)
 {
-  associated.AddComponent(new Sprite(associated, "assets/img/minion.png"));
+  Sprite *minion_ptr = new Sprite(associated, "assets/img/minion.png");
+  float scale = 1 + (float)(rand() % 501) / 1000;
+  minion_ptr->SetScaleX(Vec2(scale, scale));
+  associated.AddComponent(minion_ptr);
 }
 
 void Minion::Shoot(Vec2 pos)
 {
   float distance = associated.box.GetCenter().GetDS(pos);
-  float angle = associated.box.GetCenter().GetAngle(pos);;
+  float angle = associated.box.GetCenter().GetAngle(pos);
   float speed = 800;
   int damage = 1;
 
@@ -40,6 +43,7 @@ void Minion::Shoot(Vec2 pos)
 void Minion::Update(float dt)
 {
   arc += 60 * dt;
+  associated.angleDeg = arc - 90;
   associated.box.x = alienCenter.box.GetCenter().x + (200 * Vec2::Cos(arc)) - (associated.box.w / 2);
   associated.box.y = alienCenter.box.GetCenter().y + (200 * Vec2::Sin(arc)) - (associated.box.h / 2);
 }
