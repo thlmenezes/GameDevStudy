@@ -12,8 +12,8 @@ Bullet::Bullet(GameObject &associated,
                string sprite)
     : Component(associated),
       speed(Vec2(speed * Vec2::Cos(angle), speed * Vec2::Sin(angle))),
-      damage(damage),
-      distanceLeft(maxDistance)
+      distanceLeft(maxDistance),
+      damage(damage)
 {
   associated.AddComponent(new Sprite(associated, sprite));
 }

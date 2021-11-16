@@ -8,7 +8,7 @@ using namespace std;
 #include "SDL_include.h"
 
 Game::Game(string title, int width, int height)
-    : dt(0), frameStart(0)
+    : frameStart(0), dt(0)
 {
   if (instance != nullptr)
   {

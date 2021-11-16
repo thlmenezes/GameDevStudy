@@ -11,8 +11,8 @@ using namespace std;
 
 Alien::Alien(GameObject &associated, int nMinions)
     : Component(associated),
-      speed(Vec2()),
       hp(10),
+      speed(Vec2()),
       nMinions(nMinions)
 {
   associated.AddComponent(new Sprite(associated, "assets/img/alien.png"));

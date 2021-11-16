@@ -23,9 +23,9 @@ using namespace std;
 #define SCREEN_HEIGHT 600
 
 State::State()
-    : music("assets/audio/stageState.ogg"),
-      started(false),
-      quitRequested(false)
+    : quitRequested(false),
+      music("assets/audio/stageState.ogg"),
+      started(false)
 {
 }
 
