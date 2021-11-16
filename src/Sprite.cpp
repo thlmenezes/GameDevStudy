@@ -10,7 +10,7 @@ using namespace std;
 #include "GameObject.h"
 
 Sprite::Sprite(GameObject &associated)
-    : Component(associated), texture(nullptr)
+    : Component(associated), texture(nullptr), scale(Vec2(1, 1))
 {
 }
 
@@ -41,6 +41,18 @@ void Sprite::SetClip(int x, int y, int w, int h)
   clipRect.h = h;
 }
 
+void Sprite::SetScaleX(Vec2 scale)
+{
+  if (scale.x == 0)
+    scale.x = this->scale.x;
+  if (scale.y == 0)
+    scale.y = this->scale.y;
+
+  this->scale = scale;
+  associated.box.w = GetWidth();
+  associated.box.h = GetHeight();
+}
+
 void Sprite::Update(float dt) {}
 
 void Sprite::Render(float x, float y)
@@ -51,11 +63,14 @@ void Sprite::Render(float x, float y)
   dstrect.w = clipRect.w;
   dstrect.h = clipRect.h;
 
-  SDL_RenderCopy(
+  SDL_RenderCopyEx(
       Game::GetInstance().GetRenderer(),
       texture.get(),
       &clipRect,
-      &dstrect);
+      &dstrect,
+      associated.angleDeg,
+      nullptr,
+      SDL_FLIP_NONE);
 }
 
 void Sprite::Render()
@@ -70,12 +85,17 @@ bool Sprite::Is(string type)
 
 int Sprite::GetWidth()
 {
-  return width;
+  return width * scale.x;
 }
 
 int Sprite::GetHeight()
 {
-  return height;
+  return height * scale.y;
+}
+
+Vec2 Sprite::GetScale()
+{
+  return scale;
 }
 
 bool Sprite::IsOpen()
