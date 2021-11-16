@@ -34,6 +34,8 @@ void Alien::Start()
 
 void Alien::Update(float dt)
 {
+  Alien::associated.angleDeg -= 60 * dt;
+
   auto clickX = InputManager::GetInstance().GetMouseX() + Camera::pos.x,
        clickY = InputManager::GetInstance().GetMouseY() + Camera::pos.y;
 
