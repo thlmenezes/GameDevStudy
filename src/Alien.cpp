@@ -50,15 +50,15 @@ void Alien::Update(float dt)
     return;
 
   auto act = taskQueue.front();
+  auto curr = associated.box.GetCenter();
+  auto dest = act.pos;
 
   if (act.type == act.SHOOT)
   {
+    ((Minion *)minionArray[rand() % nMinions].lock()->GetComponent("Minion"))->Shoot(dest);
     taskQueue.pop();
     return;
   }
-
-  auto curr = associated.box.GetCenter();
-  auto dest = act.pos;
 
   float sin = curr.GetSin(dest);
   if (sin != sin)
