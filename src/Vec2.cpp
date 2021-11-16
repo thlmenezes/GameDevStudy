@@ -51,6 +51,10 @@ float Vec2::GetSin(Vec2 pos)
   return GetDY(pos.y) / GetDS(pos);
 }
 
+float Vec2::GetAngle(Vec2 pos) {
+  return atan2(GetDY(pos.y), GetDX(pos.x)) * (180/PI);
+}
+
 Vec2::~Vec2() {}
 
 Vec2 operator+(Vec2 const &v1, Vec2 const &v2)

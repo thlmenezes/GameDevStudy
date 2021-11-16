@@ -10,7 +10,7 @@ using namespace std;
 #include "Bullet.h"
 #include "State.h"
 
-Minion::Minion(GameObject &associated, GameObject& alienCenter, float arcOffsetDeg)
+Minion::Minion(GameObject &associated, GameObject &alienCenter, float arcOffsetDeg)
     : Component(associated),
       alienCenter(alienCenter),
       arc(arcOffsetDeg)
@@ -21,7 +21,7 @@ Minion::Minion(GameObject &associated, GameObject& alienCenter, float arcOffsetD
 void Minion::Shoot(Vec2 pos)
 {
   float distance = associated.box.GetCenter().GetDS(pos);
-  float angle = 1;
+  float angle = associated.box.GetCenter().GetAngle(pos);;
   float speed = 800;
   int damage = 1;
 

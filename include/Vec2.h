@@ -14,6 +14,7 @@
       Vec2 GetRotated(float angle);
       float GetCos(Vec2 pos);
       float GetSin(Vec2 pos);
+      float GetAngle(Vec2 pos);
       float GetDS(Vec2 pos);
       ~Vec2();
 
