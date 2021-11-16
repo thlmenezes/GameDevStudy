@@ -22,6 +22,8 @@ using namespace std;
 #define SCREEN_WIDTH 1024
 #define SCREEN_HEIGHT 600
 
+#define loop(x, n) for (long unsigned int x = 0; x < n; ++x)
+
 State::State()
     : quitRequested(false),
       music("assets/audio/stageState.ogg"),
@@ -48,7 +50,7 @@ void State::LoadAssets()
   objectArray.emplace_back(tilemap);
 
   auto alien = new GameObject();
-  auto et = new Alien(*alien, 1);
+  auto et = new Alien(*alien, 3);
   alien->box.SetCenter(512, 300);
   alien->AddComponent(et);
   objectArray.emplace_back(alien);
@@ -88,12 +90,12 @@ void State::Update(float dt)
 
   Camera::Update(dt);
 
-  for (auto it = objectArray.begin(); it < objectArray.end(); it++)
+  loop(i, objectArray.size())
   {
-    auto object = it->get();
+    auto object = objectArray[i];
     object->Update(dt);
     if (object->IsDead())
-      objectArray.erase(it, it + 1);
+      objectArray.erase(objectArray.begin() + i);
   }
 }
 
