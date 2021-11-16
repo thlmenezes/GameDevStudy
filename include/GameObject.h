@@ -15,6 +15,7 @@
     public:
       Rect box;
       bool started;
+      double angleDeg;
 
       GameObject();
       void Start();

@@ -7,7 +7,8 @@ using namespace std;
 
 GameObject::GameObject()
     : isDead(false),
-      started(false)
+      started(false),
+      angleDeg(0)
 {
 }
 
