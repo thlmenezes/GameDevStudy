@@ -35,7 +35,7 @@ void Minion::Shoot(Vec2 pos)
       speed,
       damage,
       distance,
-      "assets/img/minionbullet1.png"));
+      "assets/img/minionbullet2.png", 3, 0.17));
   go->box.SetCenter(associated.box.GetCenter());
   Game::GetInstance().GetState().AddObject(go);
 }
