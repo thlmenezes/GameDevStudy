@@ -29,13 +29,15 @@ void Minion::Shoot(Vec2 pos)
   int damage = 1;
 
   GameObject *go = new GameObject();
+  auto sprite_ptr = new Sprite(*go, "assets/img/minionbullet2.png", 3, 0.17);
+  sprite_ptr->SetScaleX(Vec2(2, 2));
   go->AddComponent(new Bullet(
       *go,
       angle,
       speed,
       damage,
       distance,
-      "assets/img/minionbullet2.png", 3, 0.17));
+      sprite_ptr));
   go->box.SetCenter(associated.box.GetCenter());
   Game::GetInstance().GetState().AddObject(go);
 }

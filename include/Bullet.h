@@ -6,6 +6,7 @@
 
   #include "Component.h"
   #include "Vec2.h"
+  #include "Sprite.h"
 
   class Bullet : public Component {
     Vec2 speed;
@@ -19,9 +20,7 @@
              float speed,
              int damage,
              float maxDistance,
-             string sprite,
-             int frameCount = 1,
-             int frameTime = 1);
+             Sprite* sprite);
 
       void Update(float dt);
       void Render();
