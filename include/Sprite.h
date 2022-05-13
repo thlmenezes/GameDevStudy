@@ -12,12 +12,16 @@
     shared_ptr<SDL_Texture> texture;
     int width;
     int height;
+    int frameCount;
+    int currentFrame;
+    float frameTime;
+    float timeElapsed;
     SDL_Rect clipRect;
     Vec2 scale;
 
     public:
       Sprite(GameObject& associated);
-      Sprite(GameObject& associated, string file);
+      Sprite(GameObject& associated, string file, int frameCount = 1, float frameTime = 1);
       void Open(string file);
       void SetClip(int x, int y,
                   int w, int h);
@@ -30,6 +34,9 @@
       int GetHeight();
       Vec2 GetScale();
       bool IsOpen();
+      void SetFrame(int frame);
+      void SetFrameCount(int frameCount);
+      void SetFrameTime(float frameTime);
       ~Sprite();
   };
 #endif
