@@ -47,6 +47,13 @@ void GameObject::AddComponent(Component *cpt)
     cpt->Start();
 }
 
+void GameObject::AddComponentAsFirst(Component *cpt)
+{
+  components.emplace(components.begin(), cpt);
+  if (started)
+    cpt->Start();
+}
+
 void GameObject::RemoveComponent(Component *cpt)
 {
   remove_if(

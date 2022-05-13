@@ -31,7 +31,7 @@ void Minion::Shoot(Vec2 pos)
   GameObject *go = new GameObject();
   auto sprite_ptr = new Sprite(*go, "assets/img/minionbullet2.png", 3, 0.17);
   sprite_ptr->SetScaleX(Vec2(2, 2));
-  go->AddComponent(new Bullet(
+  go->AddComponentAsFirst(new Bullet(
       *go,
       angle,
       speed,

@@ -24,6 +24,7 @@
       bool IsDead();
       void RequestDelete();
       void AddComponent(Component* cpt);
+      void AddComponentAsFirst(Component* cpt);
       void RemoveComponent(Component* cpt);
       Component* GetComponent(string type);
       ~GameObject();
