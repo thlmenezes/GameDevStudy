@@ -36,8 +36,8 @@ void Alien::Update(float dt)
 {
   Alien::associated.angleDeg -= 60 * dt;
 
-  auto clickX = InputManager::GetInstance().GetMouseX() + Camera::pos.x,
-       clickY = InputManager::GetInstance().GetMouseY() + Camera::pos.y;
+  auto clickX = InputManager::GetInstance().GetMousePos().x + Camera::pos.x,
+       clickY = InputManager::GetInstance().GetMousePos().y + Camera::pos.y;
 
   if (InputManager::GetInstance().IsMouseDown(LEFT_MOUSE_BUTTON))
     taskQueue.push(Action(Action::SHOOT, clickX, clickY));

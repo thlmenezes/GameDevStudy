@@ -3,6 +3,7 @@
 using namespace std;
 
 #include "InputManager.h"
+#include "Vec2.h"
 
 InputManager::InputManager()
     : quitRequested(false),
@@ -89,14 +90,9 @@ bool InputManager::IsMouseDown(int button)
   return mouseState[button];
 }
 
-int InputManager::GetMouseX()
+Vec2 InputManager::GetMousePos()
 {
-  return mouseX;
-}
-
-int InputManager::GetMouseY()
-{
-  return mouseY;
+  return Vec2(mouseX, mouseY);
 }
 
 bool InputManager::QuitRequested()

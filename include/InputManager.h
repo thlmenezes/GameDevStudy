@@ -6,6 +6,7 @@
 
   #define INCLUDE_SDL
   #include "SDL_include.h"
+  #include "Vec2.h"
 
   #define LEFT_ARROW_KEY SDLK_LEFT
   #define RIGHT_ARROW_KEY SDLK_RIGHT
@@ -48,8 +49,7 @@
       bool MouseRelease(int button);
       bool IsMouseDown(int button);
 
-      int GetMouseX();
-      int GetMouseY();
+      Vec2 GetMousePos();
 
       bool QuitRequested();
 
