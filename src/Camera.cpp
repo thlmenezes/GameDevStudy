@@ -19,7 +19,15 @@ void Camera::Unfollow()
 void Camera::Update(float dt)
 {
   if (focus)
+  {
+    int width, height;
+    SDL_GetRendererOutputSize(
+        Game::GetInstance().GetRenderer(),
+        &width, &height);
+    pos.x = focus->box.GetCenter().x - width / 2;
+    pos.y = focus->box.GetCenter().y - height / 2;
     return;
+  }
 
   if (InputManager::GetInstance().IsKeyDown(UP_ARROW_KEY))
     pos.y -= speed.y * dt;
