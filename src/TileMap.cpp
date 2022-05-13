@@ -63,7 +63,10 @@ void TileMap::Update(float dt) {}
 void TileMap::Render()
 {
   for (int layer = 0; layer < mapDepth; layer++)
-    RenderLayer(layer, Camera::pos.x, Camera::pos.y);
+    RenderLayer(
+        layer,
+        Camera::pos.x * (1 + (layer * 0.50)),
+        Camera::pos.y * (1 + (layer * 0.50)));
 }
 
 bool TileMap::Is(string type)
