@@ -32,6 +32,23 @@ bool Rect::Contains(initializer_list<float> mouse)
   return !outside;
 }
 
+void Rect::SetPos(float x, float y)
+{
+  this->x = x;
+  this->y = y;
+}
+
+void Rect::SetPos(Vec2 pos)
+{
+  x = pos.x;
+  y = pos.y;
+}
+
+Vec2 Rect::GetPos()
+{
+  return Vec2(x, y);
+}
+
 void Rect::SetCenter(float x, float y)
 {
   Rect::x += x - GetCenter().x;

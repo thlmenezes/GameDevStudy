@@ -13,6 +13,9 @@
       Rect();
       Rect(int x, int y, int width, int height);
       bool Contains(initializer_list<float> mouse);
+      void SetPos(float x, float y);
+      void SetPos(Vec2 pos);
+      Vec2 GetPos();
       void SetCenter(float x, float y);
       void SetCenter(Vec2 center);
       Vec2 GetCenter();
