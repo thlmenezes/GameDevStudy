@@ -10,7 +10,11 @@ using namespace std;
 #include "GameObject.h"
 
 Sprite::Sprite(GameObject &associated)
-    : Component(associated), texture(nullptr), scale(Vec2(1, 1))
+    : Component(associated),
+      texture(nullptr),
+      width(0),
+      height(0),
+      scale(Vec2(1, 1))
 {
 }
 
