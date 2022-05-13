@@ -9,13 +9,15 @@ Bullet::Bullet(GameObject &associated,
                float speed,
                int damage,
                float maxDistance,
-               string sprite)
+               string sprite,
+               int frameCount,
+               int frameTime)
     : Component(associated),
       speed(Vec2(speed * Vec2::Cos(angle), speed * Vec2::Sin(angle))),
       distanceLeft(maxDistance),
       damage(damage)
 {
-  Sprite *sprite_ptr = new Sprite(associated, sprite);
+  Sprite *sprite_ptr = new Sprite(associated, sprite, frameCount, frameTime);
   sprite_ptr->SetScaleX(Vec2(2, 2));
   associated.AddComponent(sprite_ptr);
   associated.angleDeg = angle;

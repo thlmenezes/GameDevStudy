@@ -19,7 +19,9 @@
              float speed,
              int damage,
              float maxDistance,
-             string sprite);
+             string sprite,
+             int frameCount = 1,
+             int frameTime = 1);
 
       void Update(float dt);
       void Render();
