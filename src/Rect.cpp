@@ -34,9 +34,8 @@ bool Rect::Contains(initializer_list<float> mouse)
 
 void Rect::SetCenter(float x, float y)
 {
-
-  Rect::x = x - (w / 2);
-  Rect::y = y - (h / 2);
+  Rect::x += x - GetCenter().x;
+  Rect::y += y - GetCenter().y;
 }
 
 void Rect::SetCenter(Vec2 center)
