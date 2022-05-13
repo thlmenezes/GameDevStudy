@@ -6,9 +6,8 @@ using namespace std;
 #include "GameObject.h"
 
 TileSet::TileSet(int titleWidth, int titleHeight, string file)
-    : tileSet(*new GameObject())
+    : tileSet(*new GameObject(), file)
 {
-  tileSet.Open(file);
   this->tileWidth = titleWidth;
   this->tileHeight = titleHeight;
   rows = tileSet.GetHeight() / tileHeight;
