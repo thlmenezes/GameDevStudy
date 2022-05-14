@@ -60,8 +60,11 @@ void State::Start()
 {
   LoadAssets();
 
-  for (auto &object : objectArray)
+  loop(i, objectArray.size())
+  {
+    auto object = objectArray[i];
     object->Start();
+  }
 
   started = true;
 }
