@@ -76,6 +76,11 @@ bool operator==(Vec2 const &v1, Vec2 const &v2)
   return v1.x == v2.x && v1.y == v2.y;
 }
 
+bool operator!=(Vec2 const &v1, Vec2 const &v2)
+{
+  return !(v1 == v2);
+}
+
 float Vec2::Cos(float rad)
 {
   return cos(rad * M_PI / 180);

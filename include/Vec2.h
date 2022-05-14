@@ -22,6 +22,7 @@
       friend Vec2 operator - (Vec2 const &, Vec2 const &);
       friend Vec2 operator * (Vec2 const &, float);
       friend bool operator == (Vec2 const &, Vec2 const &);
+      friend bool operator != (Vec2 const &, Vec2 const &);
 
       static float Cos(float rad);
       static float Sin(float rad);
