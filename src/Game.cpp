@@ -8,7 +8,7 @@ using namespace std;
 #include "SDL_include.h"
 
 Game::Game(string title, int width, int height)
-    : frameStart(0), dt(0)
+    : frameStart(0), dt(0), storedState(nullptr)
 {
   if (instance != nullptr)
   {
@@ -79,8 +79,6 @@ Game::Game(string title, int width, int height)
     SDL_Log("Unable to create renderer SDL_CreateRenderer: %s", SDL_GetError());
     exit(EXIT_FAILURE);
   }
-
-  state = new State();
 }
 
 Game &Game::GetInstance()
@@ -97,16 +95,46 @@ Game &Game::GetInstance()
 
 void Game::Run()
 {
-  state->Start();
-
-  while (!state->QuitRequested())
+  if (storedState)
   {
-    CalculateDeltaTime();
-    InputManager::GetInstance().Update();
-    state->Update(GetDeltaTime());
-    state->Render();
-    SDL_RenderPresent(renderer);
-    SDL_Delay(16); // 30 FPS == 33MS delay
+    stateStack.emplace(storedState);
+    stateStack.top()->Start();
+    storedState = nullptr;
+  }
+
+  if (stateStack.empty())
+    return;
+
+  while (!stateStack.top()->QuitRequested())
+  {
+    while (!(storedState) &&
+           !(stateStack.top()->PopRequested()) &&
+           !(stateStack.top()->QuitRequested()))
+    {
+      if (SDL_RenderClear(renderer))
+        SDL_Log("Unable to clear renderer: %s", SDL_GetError());
+      CalculateDeltaTime();
+      Camera::Update(GetDeltaTime());
+      InputManager::GetInstance().Update();
+      stateStack.top()->Update(GetDeltaTime());
+      stateStack.top()->Render();
+      SDL_RenderPresent(renderer);
+      SDL_Delay(16); // 30 FPS == 33MS delay
+    }
+
+    if (storedState)
+    {
+      stateStack.top()->Pause();
+      stateStack.emplace(storedState);
+      stateStack.top()->Start();
+      storedState = nullptr;
+    }
+    else if (stateStack.top()->PopRequested())
+    {
+      stateStack.pop();
+      if (!stateStack.empty())
+        stateStack.top()->Resume();
+    }
   }
 }
 
@@ -115,9 +143,14 @@ SDL_Renderer *Game::GetRenderer()
   return renderer;
 }
 
-State &Game::GetState()
+State &Game::GetCurrentState()
 {
-  return *state;
+  return *stateStack.top().get();
+}
+
+void Game::Push(State *state)
+{
+  Game::storedState = state;
 }
 
 void Game::CalculateDeltaTime()
@@ -133,6 +166,10 @@ float Game::GetDeltaTime()
 
 Game::~Game()
 {
+  if (storedState != nullptr)
+    delete (storedState);
+  while (!stateStack.empty())
+    stateStack.pop();
   SDL_DestroyRenderer(renderer);
   SDL_DestroyWindow(window);
   Mix_CloseAudio();

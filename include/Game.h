@@ -1,17 +1,22 @@
 #ifndef GAME_H
   #define GAME_H
+  #include <stack>
+  
   using namespace std;
 
   #define INCLUDE_SDL_IMAGE
   #define INCLUDE_SDL_MIXER
   #include "SDL_include.h"
   #include "State.h"
+  // #include "StageState.h"
+  // #include "TitleState.h"
 
   class Game {
     static Game* instance;
     SDL_Window* window;
     SDL_Renderer* renderer;
-    State* state;
+    State* storedState;
+    stack<unique_ptr<State>> stateStack;
 
     int frameStart;
     float dt;
@@ -22,7 +27,8 @@
       static Game& GetInstance();
       void Run();
       SDL_Renderer* GetRenderer();
-      State& GetState();
+      State& GetCurrentState();
+      void Push(State *state);
       float GetDeltaTime();
       ~Game();
   };
