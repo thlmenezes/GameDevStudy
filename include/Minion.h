@@ -9,7 +9,7 @@
   #include "Vec2.h"
 
   class Minion : public Component {
-    GameObject& alienCenter;
+    weak_ptr<GameObject> alienCenter;
     float arc;
 
     public:

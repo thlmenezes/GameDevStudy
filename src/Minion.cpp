@@ -13,7 +13,7 @@ using namespace std;
 
 Minion::Minion(GameObject &associated, GameObject &alienCenter, float arcOffsetDeg)
     : Component(associated),
-      alienCenter(alienCenter),
+      alienCenter(Game::GetInstance().GetState().GetObjectPtr(&alienCenter)),
       arc(arcOffsetDeg)
 {
   Sprite *minion_ptr = new Sprite(associated, "assets/img/minion.png");
@@ -47,10 +47,22 @@ void Minion::Shoot(Vec2 pos)
 
 void Minion::Update(float dt)
 {
-  arc += 60 * dt;
-  associated.angleDeg = arc - 90;
-  associated.box.x = alienCenter.box.GetCenter().x + (200 * Vec2::Cos(arc)) - (associated.box.w / 2);
-  associated.box.y = alienCenter.box.GetCenter().y + (200 * Vec2::Sin(arc)) - (associated.box.h / 2);
+  if (alienCenter.expired())
+  {
+    associated.RequestDelete();
+    GameObject *minionDeathGO = new GameObject();
+    minionDeathGO->AddComponent(new Sprite(*minionDeathGO, "assets/img/miniondeath.png", 4, 0.15));
+    minionDeathGO->box.SetCenter(associated.box.GetCenter());
+    minionDeathGO->angleDeg = rand() % 360;
+    Game::GetInstance().GetState().AddObject(minionDeathGO);
+  }
+  else
+  {
+    arc += 60 * dt;
+    associated.angleDeg = arc - 90;
+    associated.box.x = alienCenter.lock()->box.GetCenter().x + (200 * Vec2::Cos(arc)) - (associated.box.w / 2);
+    associated.box.y = alienCenter.lock()->box.GetCenter().y + (200 * Vec2::Sin(arc)) - (associated.box.h / 2);
+  }
 }
 
 void Minion::Render() {}
