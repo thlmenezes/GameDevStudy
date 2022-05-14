@@ -19,6 +19,7 @@
       ~Vec2();
 
       friend Vec2 operator + (Vec2 const &, Vec2 const &);
+      friend Vec2 operator - (Vec2 const &, Vec2 const &);
       friend Vec2 operator * (Vec2 const &, float);
       friend bool operator == (Vec2 const &, Vec2 const &);
 
