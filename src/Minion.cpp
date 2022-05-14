@@ -51,7 +51,7 @@ void Minion::Update(float dt)
   {
     associated.RequestDelete();
     GameObject *minionDeathGO = new GameObject();
-    minionDeathGO->AddComponent(new Sprite(*minionDeathGO, "assets/img/miniondeath.png", 4, 0.15));
+    minionDeathGO->AddComponent(new Sprite(*minionDeathGO, "assets/img/miniondeath.png", 4, 0.15, 12.0 / 30.0));
     minionDeathGO->box.SetCenter(associated.box.GetCenter());
     minionDeathGO->angleDeg = rand() % 360;
     Game::GetInstance().GetState().AddObject(minionDeathGO);

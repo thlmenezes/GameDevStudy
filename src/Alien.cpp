@@ -110,7 +110,7 @@ void Alien::Damage(int damage)
 
   associated.RequestDelete();
   GameObject *alienDeathGO = new GameObject();
-  alienDeathGO->AddComponent(new Sprite(*alienDeathGO, "assets/img/aliendeath.png", 4, 0.15));
+  alienDeathGO->AddComponent(new Sprite(*alienDeathGO, "assets/img/aliendeath.png", 4, 0.15, 12.0 / 30.0));
   Sound *sound = new Sound(*alienDeathGO, "assets/audio/boom.wav");
   sound->Play();
   alienDeathGO->AddComponent(sound);

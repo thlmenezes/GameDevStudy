@@ -7,6 +7,7 @@
   #include "SDL_include.h"
   #include "Component.h"
   #include "Vec2.h"
+  #include "Timer.h"
 
   class Sprite: public Component {
     shared_ptr<SDL_Texture> texture;
@@ -18,10 +19,12 @@
     float timeElapsed;
     SDL_Rect clipRect;
     Vec2 scale;
+    Timer selfDestructCount;
+    float secondsToSelfDestruct;
 
     public:
       Sprite(GameObject& associated);
-      Sprite(GameObject& associated, string file, int frameCount = 1, float frameTime = 1);
+      Sprite(GameObject& associated, string file, int frameCount = 1, float frameTime = 1, float secondsToSelfDestruct = 0);
 
       void Open(string file);
       void SetClip(int x, int y,

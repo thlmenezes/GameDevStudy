@@ -82,7 +82,7 @@ void PenguinBody::Damage(int damage)
     return;
   associated.RequestDelete();
   GameObject *penguinDeathGO = new GameObject();
-  penguinDeathGO->AddComponent(new Sprite(*penguinDeathGO, "assets/img/penguindeath.png", 5, 0.15));
+  penguinDeathGO->AddComponent(new Sprite(*penguinDeathGO, "assets/img/penguindeath.png", 5, 0.15, 15.0 / 30.0));
   Sound *sound = new Sound(*penguinDeathGO, "assets/audio/boom.wav");
   sound->Play();
   penguinDeathGO->AddComponent(sound);

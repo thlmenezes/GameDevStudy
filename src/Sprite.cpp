@@ -18,16 +18,19 @@ Sprite::Sprite(GameObject &associated)
       currentFrame(0),
       frameTime(1),
       timeElapsed(0),
-      scale(Vec2(1, 1))
+      scale(Vec2(1, 1)),
+      selfDestructCount(Timer()),
+      secondsToSelfDestruct(0)
 {
 }
 
-Sprite::Sprite(GameObject &associated, string file, int frameCount, float frameTime)
+Sprite::Sprite(GameObject &associated, string file, int frameCount, float frameTime, float secondsToSelfDestruct)
     : Sprite(associated)
 {
   Open(file);
   SetFrameCount(frameCount);
   SetFrameTime(frameTime);
+  this->secondsToSelfDestruct = secondsToSelfDestruct;
 }
 
 void Sprite::Open(string file)
@@ -92,6 +95,12 @@ void Sprite::SetFrameTime(float frameTime)
 void Sprite::Update(float dt)
 {
   timeElapsed += dt;
+  if (secondsToSelfDestruct > 0)
+  {
+    selfDestructCount.Update(dt);
+    if (selfDestructCount.Get() > secondsToSelfDestruct)
+      associated.RequestDelete();
+  }
   if (timeElapsed < frameTime)
     return;
 
@@ -149,7 +158,7 @@ bool Sprite::IsOpen()
   return texture != nullptr;
 }
 
-void Sprite::NotifyCollision(GameObject& other){}
+void Sprite::NotifyCollision(GameObject &other) {}
 
 Sprite::~Sprite()
 {
