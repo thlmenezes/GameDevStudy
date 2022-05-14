@@ -37,7 +37,8 @@ void Minion::Shoot(Vec2 pos)
       speed,
       damage,
       distance,
-      sprite_ptr));
+      sprite_ptr,
+      true));
   go->box.SetCenter(associated.box.GetCenter());
   Game::GetInstance().GetState().AddObject(go);
 }
@@ -56,5 +57,7 @@ bool Minion::Is(string type)
 {
   return "Minion" == type;
 }
+
+void Minion::NotifyCollision(GameObject &other) {}
 
 Minion::~Minion() {}

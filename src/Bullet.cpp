@@ -9,11 +9,13 @@ Bullet::Bullet(GameObject &associated,
                float speed,
                int damage,
                float maxDistance,
-               Sprite *sprite)
+               Sprite *sprite,
+               bool targetsPlayer)
     : Component(associated),
       speed(Vec2(speed * Vec2::Cos(angle), speed * Vec2::Sin(angle))),
       distanceLeft(maxDistance),
-      damage(damage)
+      damage(damage),
+      targetsPlayer(targetsPlayer)
 {
   associated.AddComponent(sprite);
   associated.angleDeg = angle;
@@ -43,5 +45,7 @@ int Bullet::GetDamage()
 {
   return damage;
 }
+
+void Bullet::NotifyCollision(GameObject &other) {}
 
 Bullet::~Bullet() {}

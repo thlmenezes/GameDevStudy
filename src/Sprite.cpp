@@ -149,6 +149,8 @@ bool Sprite::IsOpen()
   return texture != nullptr;
 }
 
+void Sprite::NotifyCollision(GameObject& other){}
+
 Sprite::~Sprite()
 {
   texture = nullptr;

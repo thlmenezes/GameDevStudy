@@ -14,18 +14,21 @@
     int damage;
 
     public:
+      bool targetsPlayer;
 
       Bullet(GameObject& associated,
              float angle,
              float speed,
              int damage,
              float maxDistance,
-             Sprite* sprite);
+             Sprite* sprite,
+             bool targetsPlayer);
 
       void Update(float dt);
       void Render();
       bool Is(string type);
       int GetDamage();
+      void NotifyCollision(GameObject& other);
 
       ~Bullet();
   };

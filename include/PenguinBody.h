@@ -26,8 +26,10 @@
 
       void Start();
       void Update(float dt);
+      void Damage(int damage);
       void Render();
       bool Is(string type);
+      void NotifyCollision(GameObject& other);
 
       ~PenguinBody();
   };

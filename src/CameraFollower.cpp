@@ -22,3 +22,5 @@ bool CameraFollower::Is(string type)
 {
   return "CameraFollower" == type;
 }
+
+void CameraFollower::NotifyCollision(GameObject &other) {}

@@ -5,6 +5,8 @@ using namespace std;
 
 #include "GameObject.h"
 
+#define loop(x, n) for (long unsigned int x = 0; x < n; ++x)
+
 GameObject::GameObject()
     : isDead(false),
       started(false),
@@ -77,6 +79,14 @@ Component *GameObject::GetComponent(string type)
     }
 
   return find_result;
+}
+
+void GameObject::NotifyCollision(GameObject &other)
+{
+  loop(i, components.size())
+  {
+    components[i]->NotifyCollision(other);
+  }
 }
 
 GameObject::~GameObject()

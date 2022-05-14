@@ -61,6 +61,8 @@ bool Sound::Is(string type)
   return "Sound" == type;
 }
 
+void Sound::NotifyCollision(GameObject &other) {}
+
 Sound::~Sound()
 {
   if (IsOpen())

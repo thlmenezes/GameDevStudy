@@ -27,6 +27,7 @@
       void AddComponentAsFirst(Component* cpt);
       void RemoveComponent(Component* cpt);
       Component* GetComponent(string type);
+      void NotifyCollision(GameObject& other);
       ~GameObject();
   };
 #endif

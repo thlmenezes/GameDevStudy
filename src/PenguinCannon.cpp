@@ -20,7 +20,7 @@ void PenguinCannon::Shoot()
   GameObject *go = new GameObject();
   Sprite *sprite = new Sprite(*go, "assets/img/penguinbullet.png", 4, 0.33);
   sprite->SetScaleX(Vec2(1, 1));
-  go->AddComponentAsFirst(new Bullet(*go, angle, 800, 1, 1000, sprite));
+  go->AddComponentAsFirst(new Bullet(*go, angle, 800, 1, 1000, sprite, false));
   go->box.SetCenter(associated.box.GetCenter() + Vec2(Vec2::Cos(angle) * associated.box.w / 2, Vec2::Sin(angle) * associated.box.w / 2));
   Game::GetInstance().GetState().AddObject(go);
 }
@@ -47,3 +47,5 @@ bool PenguinCannon::Is(string type)
 {
   return "PenguinCannon" == type;
 }
+
+void PenguinCannon::NotifyCollision(GameObject &other) {}

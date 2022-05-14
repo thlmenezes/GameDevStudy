@@ -5,6 +5,7 @@ using namespace std;
 #include "InputManager.h"
 #include "Camera.h"
 #include "Game.h"
+#include "Bullet.h"
 
 PenguinBody *PenguinBody::player = nullptr;
 
@@ -72,11 +73,36 @@ void PenguinBody::Update(float dt)
   }
 }
 
+void PenguinBody::Damage(int damage)
+{
+  hp -= damage;
+  if (hp > 1)
+    return;
+  associated.RequestDelete();
+  GameObject *penguinDeathGO = new GameObject();
+  penguinDeathGO->AddComponent(new Sprite(*penguinDeathGO, "assets/img/penguindeath.png", 5, 0.15));
+  Sound *sound = new Sound(*penguinDeathGO, "assets/audio/boom.wav");
+  sound->Play();
+  penguinDeathGO->AddComponent(sound);
+  penguinDeathGO->box.SetCenter(associated.box.GetCenter());
+  penguinDeathGO->angleDeg = rand() % 360;
+  Game::GetInstance().GetState().AddObject(penguinDeathGO);
+}
+
 void PenguinBody::Render() {}
 
 bool PenguinBody::Is(string type)
 {
   return "PenguinBody" == type;
+}
+
+void PenguinBody::NotifyCollision(GameObject &other)
+{
+  Bullet *bullet = static_cast<Bullet *>(other.GetComponent("Bullet"));
+  if (bullet == nullptr ||
+      bullet->targetsPlayer)
+    return;
+  Damage(bullet->GetDamage());
 }
 
 PenguinBody::~PenguinBody()

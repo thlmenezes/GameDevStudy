@@ -6,6 +6,8 @@ using namespace std;
 #include "Camera.h"
 #include "Minion.h"
 #include "Game.h"
+#include "Bullet.h"
+#include "Sound.h"
 
 #define loop(x, n) for (unsigned int x = 0; x < (unsigned int)n; ++x)
 
@@ -97,11 +99,37 @@ void Alien::Update(float dt)
     taskQueue.pop();
 }
 
+void Alien::Damage(int damage)
+{
+  hp -= damage;
+  if (hp > 1)
+    return;
+
+  associated.RequestDelete();
+  GameObject *alienDeathGO = new GameObject();
+  alienDeathGO->AddComponent(new Sprite(*alienDeathGO, "assets/img/aliendeath.png", 4, 0.15));
+  Sound *sound = new Sound(*alienDeathGO, "assets/audio/boom.wav");
+  sound->Play();
+  alienDeathGO->AddComponent(sound);
+  alienDeathGO->box.SetCenter(Alien::associated.box.GetCenter());
+  alienDeathGO->angleDeg = rand() % 360;
+  Game::GetInstance().GetState().AddObject(alienDeathGO);
+}
+
 void Alien::Render() {}
 
 bool Alien::Is(string type)
 {
   return "Alien" == type;
+}
+
+void Alien::NotifyCollision(GameObject &other)
+{
+  Bullet *bullet = static_cast<Bullet *>(other.GetComponent("Bullet"));
+  if (bullet == nullptr ||
+      bullet->targetsPlayer)
+    return;
+  Damage(bullet->GetDamage());
 }
 
 Alien::~Alien()

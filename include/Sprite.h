@@ -22,6 +22,7 @@
     public:
       Sprite(GameObject& associated);
       Sprite(GameObject& associated, string file, int frameCount = 1, float frameTime = 1);
+
       void Open(string file);
       void SetClip(int x, int y,
                   int w, int h);
@@ -37,6 +38,8 @@
       void SetFrame(int frame);
       void SetFrameCount(int frameCount);
       void SetFrameTime(float frameTime);
+      void NotifyCollision(GameObject& other);
+
       ~Sprite();
   };
 #endif

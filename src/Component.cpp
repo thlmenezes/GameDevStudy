@@ -8,4 +8,6 @@ Component::Component(GameObject &associated)
 {
 }
 
+void Component::NotifyCollision(GameObject &other) {}
+
 Component::~Component() {}

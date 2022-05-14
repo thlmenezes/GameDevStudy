@@ -89,4 +89,6 @@ int TileMap::GetDepth()
   return mapDepth;
 }
 
+void TileMap::NotifyCollision(GameObject &other) {}
+
 TileMap::~TileMap() {}

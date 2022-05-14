@@ -15,6 +15,7 @@
     public:
       Sound(GameObject& associated);
       Sound(GameObject& associated, string file);
+
       void Open(string file);
       void Play(int times = 1);
       void Stop();
@@ -22,6 +23,8 @@
       void Update(float dt);
       void Render();
       bool Is(string type);
+      void NotifyCollision(GameObject& other);
+
       ~Sound();
   };
 #endif

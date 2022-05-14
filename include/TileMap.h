@@ -14,6 +14,7 @@
 
     public:
       TileMap(GameObject& associated, string file, TileSet* tileSet);
+
       void Load(string file);
       void SetTileSet(TileSet* tileSet);
       int& At(int x, int y, int z = 0);
@@ -24,6 +25,8 @@
       int GetWidth();
       int GetHeight();
       int GetDepth();
+      void NotifyCollision(GameObject& other);
+
       ~TileMap();
   };
 #endif

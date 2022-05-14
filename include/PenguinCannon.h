@@ -26,5 +26,6 @@
       void Update(float dt);
       void Render();
       bool Is(string type);
+      void NotifyCollision(GameObject& other);
   };
 #endif
