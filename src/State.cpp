@@ -38,7 +38,7 @@ void State::LoadAssets()
   bg = new Sprite(*background, "assets/img/ocean.jpg");
   background->AddComponent(bg);
   background->AddComponent(new CameraFollower(*background));
-  objectArray.emplace_back(background);
+  AddObject(background);
 
   auto tilemap = new GameObject();
   auto scenario = new TileMap(
@@ -47,13 +47,13 @@ void State::LoadAssets()
       new TileSet(64, 64, "assets/img/tileset.png"));
 
   tilemap->AddComponent(scenario);
-  objectArray.emplace_back(tilemap);
+  AddObject(tilemap);
 
   auto alien = new GameObject();
   auto et = new Alien(*alien, 3);
   alien->box.SetCenter(512, 300);
   alien->AddComponent(et);
-  objectArray.emplace_back(alien);
+  AddObject(alien);
 }
 
 void State::Start()
