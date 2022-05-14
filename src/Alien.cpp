@@ -8,6 +8,7 @@ using namespace std;
 #include "Game.h"
 #include "Bullet.h"
 #include "Sound.h"
+#include "Collider.h"
 
 #define loop(x, n) for (unsigned int x = 0; x < (unsigned int)n; ++x)
 
@@ -18,6 +19,7 @@ Alien::Alien(GameObject &associated, int nMinions)
       nMinions(nMinions)
 {
   associated.AddComponent(new Sprite(associated, "assets/img/alien.png"));
+  associated.AddComponent(new Collider(associated));
 }
 
 void Alien::Start()

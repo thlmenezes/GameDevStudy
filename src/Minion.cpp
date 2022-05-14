@@ -9,6 +9,7 @@ using namespace std;
 #include "Sprite.h"
 #include "Bullet.h"
 #include "State.h"
+#include "Collider.h"
 
 Minion::Minion(GameObject &associated, GameObject &alienCenter, float arcOffsetDeg)
     : Component(associated),
@@ -19,6 +20,7 @@ Minion::Minion(GameObject &associated, GameObject &alienCenter, float arcOffsetD
   float scale = 1 + (float)(rand() % 501) / 1000;
   minion_ptr->SetScaleX(Vec2(scale, scale));
   associated.AddComponent(minion_ptr);
+  associated.AddComponent(new Collider(associated));
 }
 
 void Minion::Shoot(Vec2 pos)

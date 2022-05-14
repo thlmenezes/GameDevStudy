@@ -4,6 +4,7 @@ using namespace std;
 #include "Bullet.h"
 #include "Camera.h"
 #include "Game.h"
+#include "Collider.h"
 
 PenguinCannon::PenguinCannon(GameObject &associated, weak_ptr<GameObject> penguinBody)
     : Component(associated),
@@ -11,6 +12,7 @@ PenguinCannon::PenguinCannon(GameObject &associated, weak_ptr<GameObject> pengui
       angle(0)
 {
   associated.AddComponent(new Sprite(associated, "./assets/img/cubngun.png"));
+  associated.AddComponent(new Collider(associated));
 }
 
 void PenguinCannon::Start() {}

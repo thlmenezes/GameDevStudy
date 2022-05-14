@@ -3,6 +3,7 @@ using namespace std;
 #include "Bullet.h"
 #include "Game.h"
 #include "Sprite.h"
+#include "Collider.h"
 
 Bullet::Bullet(GameObject &associated,
                float angle,
@@ -19,6 +20,7 @@ Bullet::Bullet(GameObject &associated,
 {
   associated.AddComponent(sprite);
   associated.angleDeg = angle;
+  associated.AddComponent(new Collider(associated));
 }
 
 void Bullet::Update(float dt)

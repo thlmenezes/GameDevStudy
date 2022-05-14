@@ -6,6 +6,7 @@ using namespace std;
 #include "Camera.h"
 #include "Game.h"
 #include "Bullet.h"
+#include "Collider.h"
 
 PenguinBody *PenguinBody::player = nullptr;
 
@@ -18,6 +19,7 @@ PenguinBody::PenguinBody(GameObject &associated)
 {
   associated.AddComponent(new Sprite(associated, "./assets/img/penguin.png"));
   player = this;
+  associated.AddComponent(new Collider(associated));
 }
 
 void PenguinBody::Start()
