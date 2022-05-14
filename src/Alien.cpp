@@ -17,7 +17,7 @@ int Alien::alienCount = 0;
 
 Alien::Alien(GameObject &associated, int nMinions)
     : Component(associated),
-      hp(10),
+      hp(100),
       speed(Vec2()),
       nMinions(nMinions),
       state(RESTING),
