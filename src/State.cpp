@@ -15,6 +15,7 @@ using namespace std;
 #include "Camera.h"
 #include "CameraFollower.h"
 #include "Alien.h"
+#include "PenguinBody.h"
 #define INCLUDE_SDL_IMAGE
 #define INCLUDE_SDL_MIXER
 #include "SDL_include.h"
@@ -54,6 +55,14 @@ void State::LoadAssets()
   alienGO->box.SetCenter(512, 300);
   alienGO->AddComponent(alien);
   AddObject(alienGO);
+
+  auto PenguinGo = new GameObject();
+  auto penguin = new PenguinBody(*PenguinGo);
+  PenguinGo->box.SetCenter(704, 640);
+  PenguinGo->AddComponent(penguin);
+  AddObject(PenguinGo);
+
+  Camera::Follow(PenguinGo);
 }
 
 void State::Start()
