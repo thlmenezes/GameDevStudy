@@ -30,6 +30,7 @@
       void Render();
       bool Is(string type);
       void NotifyCollision(GameObject& other);
+      Vec2 GetPlayerCenter();
 
       ~PenguinBody();
   };

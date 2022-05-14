@@ -107,6 +107,11 @@ void PenguinBody::NotifyCollision(GameObject &other)
   Damage(bullet->GetDamage());
 }
 
+Vec2 PenguinBody::GetPlayerCenter()
+{
+  return associated.box.GetCenter();
+}
+
 PenguinBody::~PenguinBody()
 {
   player = nullptr;
