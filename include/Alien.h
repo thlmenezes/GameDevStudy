@@ -10,19 +10,14 @@
 
   #include "Component.h"
   #include "Vec2.h"
+  #include "Timer.h"
 
   class Alien : public Component {
-    class Action {
-      public:
-        enum ActionType { MOVE, SHOOT };
-        Action (ActionType type, float x, float y) {
-          this->type = type;
-          pos.x = x;
-          pos.y = y;
-        };
-        ActionType type;
-        Vec2 pos;
-    };
+    enum AlienState { RESTING, MOVING };
+    AlienState state;
+    Timer restTimer;
+    float restTime;
+    Vec2 destination;
 
     int hp;
     Vec2 speed;
@@ -30,9 +25,10 @@
 
     vector<weak_ptr<GameObject>> minionArray;
 
-    queue<Action> taskQueue;
-
     public:
+      static int alienCount;
+
+    
       Alien(GameObject& associated, int nMinions);
 
       void Start();

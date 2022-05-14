@@ -9,17 +9,24 @@ using namespace std;
 #include "Bullet.h"
 #include "Sound.h"
 #include "Collider.h"
+#include "PenguinBody.h"
 
 #define loop(x, n) for (unsigned int x = 0; x < (unsigned int)n; ++x)
+
+int Alien::alienCount = 0;
 
 Alien::Alien(GameObject &associated, int nMinions)
     : Component(associated),
       hp(10),
       speed(Vec2()),
-      nMinions(nMinions)
+      nMinions(nMinions),
+      state(RESTING),
+      restTimer(Timer()),
+      restTime(1 + (rand() % 11) / 10)
 {
   associated.AddComponent(new Sprite(associated, "assets/img/alien.png"));
   associated.AddComponent(new Collider(associated));
+  alienCount++;
 }
 
 void Alien::Start()
@@ -38,41 +45,27 @@ void Alien::Start()
 
 void Alien::Update(float dt)
 {
-  Alien::associated.angleDeg -= 60 * dt;
+  associated.angleDeg -= 60 * dt;
 
-  auto clickX = InputManager::GetInstance().GetMousePos().x + Camera::pos.x,
-       clickY = InputManager::GetInstance().GetMousePos().y + Camera::pos.y;
-
-  // NOTE: IGNORE MANUAL INPUT FOR NOW
-  // if (InputManager::GetInstance().IsMouseDown(LEFT_MOUSE_BUTTON))
-  //   taskQueue.push(Action(Action::SHOOT, clickX, clickY));
-
-  // if (InputManager::GetInstance().IsMouseDown(RIGHT_MOUSE_BUTTON))
-  //   taskQueue.push(Action(Action::MOVE, clickX, clickY));
-
-  if (hp < 1)
-    associated.RequestDelete();
-
-  if (!taskQueue.size())
+  if (!PenguinBody::player)
     return;
 
-  auto act = taskQueue.front();
-  auto curr = associated.box.GetCenter();
-  auto dest = act.pos;
-
-  if (act.type == act.SHOOT)
+  if (state == RESTING)
   {
-    if (minionArray.empty())
+    restTimer.Update(dt);
+
+    if (restTimer.Get() < restTime)
       return;
 
-    ((Minion *)(minionArray[rand() % nMinions]
-                    .lock()
-                    ->GetComponent("Minion")))
-        ->Shoot(dest);
-
-    taskQueue.pop();
+    state = MOVING;
+    restTimer.Restart();
+    restTime = 1 + (rand() % 11) / 10;
+    destination = PenguinBody::player->GetPlayerCenter();
     return;
   }
+
+  Vec2 curr = associated.box.GetCenter();
+  Vec2 dest = destination;
 
   float sin = curr.GetSin(dest);
   if (sin != sin)
@@ -98,8 +91,27 @@ void Alien::Update(float dt)
 
   associated.box.SetCenter(curr);
 
-  if (curr == dest)
-    taskQueue.pop();
+  if (curr != dest)
+    return;
+
+  state = RESTING;
+  destination = PenguinBody::player->GetPlayerCenter();
+
+  if (minionArray.empty())
+    return;
+
+  int nearestMinion = 0;
+  float minionDS = minionArray[0].lock()->box.GetCenter().GetDS(destination);
+  for (unsigned int i = 1; i < minionArray.size(); i++)
+  {
+    if (minionArray[i].lock()->box.GetCenter().GetDS(destination) < minionDS)
+    {
+      nearestMinion = i;
+      minionDS = minionArray[i].lock()->box.GetCenter().GetDS(destination);
+    }
+  }
+  Minion *minion = static_cast<Minion *>(minionArray[nearestMinion].lock()->GetComponent("Minion"));
+  minion->Shoot(destination);
 }
 
 void Alien::Damage(int damage)
@@ -138,4 +150,5 @@ void Alien::NotifyCollision(GameObject &other)
 Alien::~Alien()
 {
   minionArray.clear();
+  alienCount--;
 }
