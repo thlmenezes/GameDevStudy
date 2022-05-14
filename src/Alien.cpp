@@ -43,11 +43,12 @@ void Alien::Update(float dt)
   auto clickX = InputManager::GetInstance().GetMousePos().x + Camera::pos.x,
        clickY = InputManager::GetInstance().GetMousePos().y + Camera::pos.y;
 
-  if (InputManager::GetInstance().IsMouseDown(LEFT_MOUSE_BUTTON))
-    taskQueue.push(Action(Action::SHOOT, clickX, clickY));
+  // NOTE: IGNORE MANUAL INPUT FOR NOW
+  // if (InputManager::GetInstance().IsMouseDown(LEFT_MOUSE_BUTTON))
+  //   taskQueue.push(Action(Action::SHOOT, clickX, clickY));
 
-  if (InputManager::GetInstance().IsMouseDown(RIGHT_MOUSE_BUTTON))
-    taskQueue.push(Action(Action::MOVE, clickX, clickY));
+  // if (InputManager::GetInstance().IsMouseDown(RIGHT_MOUSE_BUTTON))
+  //   taskQueue.push(Action(Action::MOVE, clickX, clickY));
 
   if (hp < 1)
     associated.RequestDelete();
