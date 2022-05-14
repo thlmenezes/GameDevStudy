@@ -5,8 +5,6 @@ using namespace std;
 
 #include "Vec2.h"
 
-#define PI 3.141592
-
 Vec2::Vec2()
     : Vec2(0, 0)
 {
@@ -53,7 +51,7 @@ float Vec2::GetSin(Vec2 pos)
 
 float Vec2::GetAngle(Vec2 pos)
 {
-  return atan2(GetDY(pos.y), GetDX(pos.x)) * (180 / PI);
+  return atan2(GetDY(pos.y), GetDX(pos.x)) * (180 / M_PI);
 }
 
 Vec2::~Vec2() {}
@@ -80,10 +78,10 @@ bool operator==(Vec2 const &v1, Vec2 const &v2)
 
 float Vec2::Cos(float rad)
 {
-  return cos(rad * PI / 180);
+  return cos(rad * M_PI / 180);
 }
 
 float Vec2::Sin(float rad)
 {
-  return sin(rad * PI / 180);
+  return sin(rad * M_PI / 180);
 }
