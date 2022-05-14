@@ -15,7 +15,7 @@ PenguinBody::PenguinBody(GameObject &associated)
       speed(Vec2()),
       linearSpeed(0.1),
       angle(0),
-      hp(1000)
+      hp(100)
 {
   associated.AddComponent(new Sprite(associated, "./assets/img/penguin.png"));
   player = this;
