@@ -12,10 +12,12 @@
   #include "Vec2.h"
   #include "Sprite.h"
   #include "Sound.h"
+  #include "Timer.h"
 
   class PenguinCannon : public Component {
     weak_ptr<GameObject> pbody;
     float angle;
+    Timer cooldown;
 
     public:
 
