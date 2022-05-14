@@ -16,8 +16,11 @@
     vector<shared_ptr<GameObject>> objectArray; 
     bool started;
 
+    void CollisionCheck();
+
     public:
       State();
+
       void LoadAssets();
       void Start();
       weak_ptr<GameObject> AddObject(GameObject* go);
@@ -25,6 +28,7 @@
       void Update(float dt);
       void Render();
       bool QuitRequested();
+
       ~State();
   };
 #endif

@@ -16,6 +16,8 @@ using namespace std;
 #include "CameraFollower.h"
 #include "Alien.h"
 #include "PenguinBody.h"
+#include "Collider.h"
+#include "Collision.cpp"
 #define INCLUDE_SDL_IMAGE
 #define INCLUDE_SDL_MIXER
 #include "SDL_include.h"
@@ -24,6 +26,8 @@ using namespace std;
 #define SCREEN_HEIGHT 600
 
 #define loop(x, n) for (long unsigned int x = 0; x < n; ++x)
+
+#define loopS(x, n, s) for (long unsigned int x = s; x < n; ++x)
 
 State::State()
     : quitRequested(false),
@@ -107,7 +111,35 @@ void State::Update(float dt)
     auto object = objectArray[i];
     object->Update(dt);
     if (object->IsDead())
+    {
+      if (Camera::GetFocus() == object.get())
+        Camera::Unfollow();
       objectArray.erase(objectArray.begin() + i);
+    }
+  }
+
+  CollisionCheck();
+}
+
+void State::CollisionCheck()
+{
+  loop(i, objectArray.size())
+  {
+    Collider *colliderI = (Collider *)objectArray[i]->GetComponent("Collider");
+    if (colliderI == nullptr)
+      continue;
+    loopS(j, objectArray.size(), i + 1)
+    {
+      Collider *colliderJ = (Collider *)objectArray[j]->GetComponent("Collider");
+      if (colliderJ == nullptr)
+        continue;
+
+      if (colliderI->IsColliding(*colliderJ))
+      {
+        objectArray[i]->NotifyCollision(*objectArray[j]);
+        objectArray[j]->NotifyCollision(*objectArray[i]);
+      }
+    }
   }
 }
 

@@ -41,3 +41,8 @@ void Camera::Update(float dt)
   if (InputManager::GetInstance().IsKeyDown(RIGHT_ARROW_KEY))
     pos.x += speed.x * dt;
 }
+
+GameObject *Camera::GetFocus()
+{
+  return focus;
+}

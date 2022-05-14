@@ -11,6 +11,7 @@
       static void Follow(GameObject* newFocus);
       static void Unfollow();
       static void Update(float dt);
+      static GameObject* GetFocus();
 
       static Vec2 pos;
       static Vec2 speed;
