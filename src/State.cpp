@@ -34,26 +34,26 @@ State::State()
 void State::LoadAssets()
 {
   music.Play(-1);
-  auto background = new GameObject();
-  bg = new Sprite(*background, "assets/img/ocean.jpg");
-  background->AddComponent(bg);
-  background->AddComponent(new CameraFollower(*background));
-  AddObject(background);
+  auto backgroundGO = new GameObject();
+  bg = new Sprite(*backgroundGO, "assets/img/ocean.jpg");
+  backgroundGO->AddComponent(bg);
+  backgroundGO->AddComponent(new CameraFollower(*backgroundGO));
+  AddObject(backgroundGO);
 
-  auto tilemap = new GameObject();
-  auto scenario = new TileMap(
-      *tilemap,
+  auto tilemapGO = new GameObject();
+  auto tilemap = new TileMap(
+      *tilemapGO,
       "assets/map/tileMap.txt",
       new TileSet(64, 64, "assets/img/tileset.png"));
 
-  tilemap->AddComponent(scenario);
-  AddObject(tilemap);
+  tilemapGO->AddComponent(tilemap);
+  AddObject(tilemapGO);
 
-  auto alien = new GameObject();
-  auto et = new Alien(*alien, 3);
-  alien->box.SetCenter(512, 300);
-  alien->AddComponent(et);
-  AddObject(alien);
+  auto alienGO = new GameObject();
+  auto alien = new Alien(*alienGO, 3);
+  alienGO->box.SetCenter(512, 300);
+  alienGO->AddComponent(alien);
+  AddObject(alienGO);
 }
 
 void State::Start()
