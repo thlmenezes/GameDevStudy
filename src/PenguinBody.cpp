@@ -102,7 +102,7 @@ void PenguinBody::NotifyCollision(GameObject &other)
 {
   Bullet *bullet = static_cast<Bullet *>(other.GetComponent("Bullet"));
   if (bullet == nullptr ||
-      bullet->targetsPlayer)
+      !bullet->targetsPlayer)
     return;
   Damage(bullet->GetDamage());
 }
