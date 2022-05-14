@@ -18,10 +18,10 @@ Vec2::Vec2(int coord_x, int coord_y)
   y = coord_y;
 }
 
-Vec2 Vec2::GetRotated(float angle)
+Vec2 Vec2::Rotate(float rad)
 {
-  float newX = x * cos(angle) - y * sin(angle),
-        newY = y * cos(angle) - x * sin(angle);
+  float newX = x * cos(rad) - y * sin(rad),
+        newY = y * cos(rad) - x * sin(rad);
 
   return Vec2(newX, newY);
 }
