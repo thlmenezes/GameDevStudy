@@ -18,6 +18,8 @@ using namespace std;
 #include "PenguinBody.h"
 #include "Collider.h"
 #include "Collision.cpp"
+#include "GameData.h"
+#include "EndState.h"
 #define INCLUDE_SDL_IMAGE
 #define INCLUDE_SDL_MIXER
 #include "SDL_include.h"
@@ -138,13 +140,13 @@ void StageState::Update(float dt)
 
   if (!PenguinBody::player)
   {
-    // GameData::playerVictory = false;
-    // Game::GetInstance().Push(new EndState());
+    GameData::playerVictory = false;
+    Game::GetInstance().Push(new EndState());
   }
   else if (Alien::alienCount < 1)
   {
-    // GameData::playerVictory = true;
-    // Game::GetInstance().Push(new EndState());
+    GameData::playerVictory = true;
+    Game::GetInstance().Push(new EndState());
   }
 }
 
