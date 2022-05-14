@@ -13,7 +13,7 @@ using namespace std;
 
 Minion::Minion(GameObject &associated, GameObject &alienCenter, float arcOffsetDeg)
     : Component(associated),
-      alienCenter(Game::GetInstance().GetState().GetObjectPtr(&alienCenter)),
+      alienCenter(Game::GetInstance().GetCurrentState().GetObjectPtr(&alienCenter)),
       arc(arcOffsetDeg)
 {
   Sprite *minion_ptr = new Sprite(associated, "assets/img/minion.png");
@@ -42,7 +42,7 @@ void Minion::Shoot(Vec2 pos)
       sprite_ptr,
       true));
   go->box.SetCenter(associated.box.GetCenter());
-  Game::GetInstance().GetState().AddObject(go);
+  Game::GetInstance().GetCurrentState().AddObject(go);
 }
 
 void Minion::Update(float dt)
@@ -54,7 +54,7 @@ void Minion::Update(float dt)
     minionDeathGO->AddComponent(new Sprite(*minionDeathGO, "assets/img/miniondeath.png", 4, 0.15, 12.0 / 30.0));
     minionDeathGO->box.SetCenter(associated.box.GetCenter());
     minionDeathGO->angleDeg = rand() % 360;
-    Game::GetInstance().GetState().AddObject(minionDeathGO);
+    Game::GetInstance().GetCurrentState().AddObject(minionDeathGO);
   }
   else
   {

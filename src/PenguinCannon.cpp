@@ -29,7 +29,7 @@ void PenguinCannon::Shoot()
   sprite->SetScaleX(Vec2(1, 1));
   go->AddComponentAsFirst(new Bullet(*go, angle, 800, 1, 1000, sprite, false));
   go->box.SetCenter(associated.box.GetCenter() + Vec2(Vec2::Cos(angle) * associated.box.w / 2, Vec2::Sin(angle) * associated.box.w / 2));
-  Game::GetInstance().GetState().AddObject(go);
+  Game::GetInstance().GetCurrentState().AddObject(go);
 
   cooldown.Restart();
 }

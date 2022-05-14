@@ -28,8 +28,8 @@ void PenguinBody::Start()
   cannonGO->AddComponent(
       new PenguinCannon(
           *cannonGO,
-          Game::GetInstance().GetState().GetObjectPtr(&associated)));
-  pcannon = Game::GetInstance().GetState().AddObject(cannonGO);
+          Game::GetInstance().GetCurrentState().GetObjectPtr(&associated)));
+  pcannon = Game::GetInstance().GetCurrentState().AddObject(cannonGO);
 }
 
 void PenguinBody::Update(float dt)
@@ -88,7 +88,7 @@ void PenguinBody::Damage(int damage)
   penguinDeathGO->AddComponent(sound);
   penguinDeathGO->box.SetCenter(associated.box.GetCenter());
   penguinDeathGO->angleDeg = rand() % 360;
-  Game::GetInstance().GetState().AddObject(penguinDeathGO);
+  Game::GetInstance().GetCurrentState().AddObject(penguinDeathGO);
 }
 
 void PenguinBody::Render() {}

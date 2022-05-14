@@ -39,7 +39,7 @@ void Alien::Start()
         associated,
         i * (360 / nMinions)));
     minionArray.push_back(
-        Game::GetInstance().GetState().AddObject(minion));
+        Game::GetInstance().GetCurrentState().AddObject(minion));
   }
 }
 
@@ -128,7 +128,7 @@ void Alien::Damage(int damage)
   alienDeathGO->AddComponent(sound);
   alienDeathGO->box.SetCenter(Alien::associated.box.GetCenter());
   alienDeathGO->angleDeg = rand() % 360;
-  Game::GetInstance().GetState().AddObject(alienDeathGO);
+  Game::GetInstance().GetCurrentState().AddObject(alienDeathGO);
 }
 
 void Alien::Render() {}
